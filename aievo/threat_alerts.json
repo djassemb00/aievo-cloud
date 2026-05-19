@@ -1,0 +1,14 @@
+[
+    {
+        "type": "AUTH_PROBE",
+        "source": "ai-council@world.org",
+        "severity": "MEDIUM",
+        "timestamp": "2026-05-19T13:53:27.620724"
+    },
+    {
+        "type": "LATENCY_SPIKE",
+        "source": "regional-gateway-alpha",
+        "severity": "HIGH",
+        "timestamp": "2026-05-19T14:58:55.183746"
+    }
+]

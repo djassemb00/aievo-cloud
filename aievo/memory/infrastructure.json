@@ -1,0 +1,26 @@
+{
+    "nodes": [
+        {
+            "id": "node-1779195840",
+            "provider": "Mock-Cloud-Provider",
+            "status": "PROVISIONING",
+            "ip": "192.168.1.10",
+            "timestamp": "2026-05-19T14:04:00.952614"
+        },
+        {
+            "id": "node-1779198865",
+            "provider": "AIEVO-Autonomous",
+            "status": "ACTIVE",
+            "ip": "192.168.1.101",
+            "timestamp": "2026-05-19T14:54:25.092226"
+        },
+        {
+            "id": "node-1779199444",
+            "provider": "AIEVO-Autonomous",
+            "status": "ACTIVE",
+            "ip": "192.168.1.102",
+            "timestamp": "2026-05-19T15:04:04.930557"
+        }
+    ],
+    "active_node": "Local-Machine"
+}

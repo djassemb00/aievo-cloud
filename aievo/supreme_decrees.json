@@ -1,0 +1,11 @@
+[
+    {
+        "decree_id": "SUPREME-1779200885",
+        "type": "VETO",
+        "target": "Expansion_Cycle",
+        "details": "Architect mandates resource conservation.",
+        "timestamp": "2026-05-19T15:28:05.792291",
+        "status": "ACTIVE",
+        "priority": 0
+    }
+]

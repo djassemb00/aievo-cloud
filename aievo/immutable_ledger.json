@@ -1,0 +1,13 @@
+[
+    {
+        "block_id": "BLOCK-1779199444",
+        "dna_fingerprint": "0d761f44eb5affb475202a362e0eb67f94dd3f37a26137d1e39f463abc4352492634f162b5836ac133f12d1a850d7530a55f63ea9391fc3b78cbedf31513a7f0",
+        "timestamp": "2026-05-19T15:04:04.940151",
+        "status": "ANCHORED",
+        "validation_nodes": [
+            "ORION-NODE-ALPHA",
+            "SIRIUS-NODE-BETA",
+            "SOL-CENTRAL"
+        ]
+    }
+]

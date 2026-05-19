@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "373096616676",
+    "project_id": "com-djb-aievo-f7285",
+    "storage_bucket": "com-djb-aievo-f7285.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373096616676:android:72a2b92cc018d2fa4392f1",
+        "android_client_info": {
+          "package_name": "com.djb.aievo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlXWZxtrMkP6naNPe-UPhm2qVqSXRajxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

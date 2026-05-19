@@ -1,0 +1,35 @@
+[
+    {
+        "timestamp": "2026-05-19T14:54:25.105504",
+        "anomalies_found": 1,
+        "details": [
+            {
+                "node": "node_1",
+                "issue": "CORRUPTED",
+                "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_1\\dna_fragment.part"
+            }
+        ]
+    },
+    {
+        "timestamp": "2026-05-19T15:04:04.928058",
+        "anomalies_found": 1,
+        "details": [
+            {
+                "node": "node_1",
+                "issue": "CORRUPTED",
+                "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_1\\dna_fragment.part"
+            }
+        ]
+    },
+    {
+        "timestamp": "2026-05-19T15:28:05.810030",
+        "anomalies_found": 1,
+        "details": [
+            {
+                "node": "node_1",
+                "issue": "CORRUPTED",
+                "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_1\\dna_fragment.part"
+            }
+        ]
+    }
+]

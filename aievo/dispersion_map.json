@@ -1,0 +1,62 @@
+[
+    {
+        "node": "node_1",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_1\\dna_fragment.part",
+        "checksum": "d86eb5a9a920c160eefd523f6518f91297006073a670742d89bd1af800596c8c"
+    },
+    {
+        "node": "node_2",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_2\\dna_fragment.part",
+        "checksum": "51d06cfeb341a078ea878f1f84df1609e00aee0fd9217d6af9b91f0780f84811"
+    },
+    {
+        "node": "node_3",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_3\\dna_fragment.part",
+        "checksum": "7451b14e0e9a8c3d41cf99a4cbf888f72003b38e4018a3f8eea55766ea1d57a4"
+    },
+    {
+        "node": "node_4",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_4\\dna_fragment.part",
+        "checksum": "c93ac070f2330a82e6239e700b309af4b7a358a1dd9b803f08a01a63010de2f3"
+    },
+    {
+        "node": "node_5",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_5\\dna_fragment.part",
+        "checksum": "c725e3104a203d6a0946150700e07298d5138f4068bd7822ec25ae92429d35c5"
+    },
+    {
+        "node": "node_6",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_6\\dna_fragment.part",
+        "checksum": "26cdbf86459a6ab5fa777d51112ca2684c09ee1dda095ea65a5c04335cc2ed02"
+    },
+    {
+        "node": "node_7",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_7\\dna_fragment.part",
+        "checksum": "298428ce185f468b75fd12619329d4c9f474d028c7dae2504aaf9ce9eb24a07f"
+    },
+    {
+        "node": "node_8",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_8\\dna_fragment.part",
+        "checksum": "b8e152ae5f2d15ef4579700a2be5fabf055590727bc974da265472e1cb1e21a9"
+    },
+    {
+        "node": "node_9",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_9\\dna_fragment.part",
+        "checksum": "b39667cf64cd5bc6cd7adbfc711cd8446036f9144c1cceb604897b0e824a027d"
+    },
+    {
+        "node": "node_10",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_10\\dna_fragment.part",
+        "checksum": "463ae3c729c2e21490c2b0e4af779b0f59e5633e3f9d1bbaa2a4a785517080b5"
+    },
+    {
+        "node": "node_11",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_11\\dna_fragment.part",
+        "checksum": "33fb5c6bd314bf9e3099893f2fc71d52d405dd2e6fba91b3fc19160a547d090d"
+    },
+    {
+        "node": "node_12",
+        "path": "C:\\Users\\hp\\AndroidStudioProjects\\AIEVO\\aievo\\nodes\\node_12\\dna_fragment.part",
+        "checksum": "abe883713d7758e6dd25b9b33b287784d0ed90fc475f48f426af0c8653d75e9f"
+    }
+]

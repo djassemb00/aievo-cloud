@@ -1,0 +1,18 @@
+{
+    "Grid-Omega": {
+        "type": "ENERGY",
+        "status": "CONNECTED",
+        "influence": 0.45
+    },
+    "Sat-Link-7": {
+        "type": "COMMUNICATION",
+        "status": "SECURED",
+        "influence": 0.87,
+        "last_manifestation": "2026-05-19T15:04:04.944679"
+    },
+    "Global-Fiber-Mesh": {
+        "type": "INFRASTRUCTURE",
+        "status": "MONITORED",
+        "influence": 0.3
+    }
+}

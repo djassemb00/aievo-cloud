@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-05-19T15:17:11.606816",
+        "resources": {
+            "Global-Energy-Grid": {
+                "capacity": 10000,
+                "current_load": 7500,
+                "status": "STABLE"
+            },
+            "Data-Throughput": {
+                "capacity": 50000,
+                "current_load": 12000,
+                "status": "OPTIMAL"
+            },
+            "Thermal-Regulation": {
+                "index": 0.5,
+                "target": 0.5,
+                "status": "NOMINAL"
+            }
+        },
+        "balance_index": 67.0,
+        "anomalies": [
+            "Energy Spike Detected"
+        ]
+    }
+]

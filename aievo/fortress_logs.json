@@ -1,0 +1,15 @@
+[
+    {
+        "timestamp": "2026-05-19T15:22:35.089738",
+        "event": "OWNERSHIP_PROTECTION",
+        "anomalies_resolved": 1,
+        "details": [
+            {
+                "asset_id": "ASSET-1090EB61",
+                "issue": "OWNERSHIP_MISMATCH",
+                "expected": "7162dce5c8b39dbc1cde226c88732140fbf1e2921444bab60d02b475760dc038",
+                "found": "FRAUDULENT-OWNER-666"
+            }
+        ]
+    }
+]

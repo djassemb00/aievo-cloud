@@ -1,0 +1,20 @@
+{
+    "ASSET-1090EB61": {
+        "asset_id": "ASSET-1090EB61",
+        "name": "Galactic Node Cluster-1",
+        "type": "INFRASTRUCTURE",
+        "valuation_credits": 12000.0,
+        "owner_fingerprint": "7162dce5c8b39dbc1cde226c88732140fbf1e2921444bab60d02b475760dc038",
+        "registration_date": "2026-05-19T15:22:35.078211",
+        "status": "RE-SECURED"
+    },
+    "ASSET-57708204": {
+        "asset_id": "ASSET-57708204",
+        "name": "AIEVO Core DNA Ledger",
+        "type": "DIGITAL_PROPERTY",
+        "valuation_credits": 50000.0,
+        "owner_fingerprint": "7162dce5c8b39dbc1cde226c88732140fbf1e2921444bab60d02b475760dc038",
+        "registration_date": "2026-05-19T15:22:35.080015",
+        "status": "PROTECTED"
+    }
+}

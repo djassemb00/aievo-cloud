@@ -1,0 +1,37 @@
+{
+    "balance_credits": 645.0,
+    "currency": "AI-Credits",
+    "transactions": [
+        {
+            "type": "DEBIT",
+            "amount": 50.0,
+            "reason": "Test Transaction",
+            "timestamp": "2026-05-19T13:13:37.638317"
+        },
+        {
+            "type": "DEBIT",
+            "amount": 50.0,
+            "reason": "Test Transaction",
+            "timestamp": "2026-05-19T13:15:50.157706"
+        },
+        {
+            "type": "DEBIT",
+            "amount": 100.0,
+            "reason": "Provisioning new node via Mock-Cloud-Provider",
+            "timestamp": "2026-05-19T14:04:00.950754"
+        },
+        {
+            "type": "DEBIT",
+            "amount": 5.0,
+            "reason": "Spawning specialized agent: Quantum Cryptography Expert",
+            "timestamp": "2026-05-19T14:09:49.197549"
+        },
+        {
+            "type": "DEBIT",
+            "amount": 150.0,
+            "reason": "Sovereign Decree Execution: DEC-22-FIN-01",
+            "timestamp": "2026-05-19T14:54:25.088861"
+        }
+    ],
+    "last_updated": "2026-05-19T14:54:25.088872"
+}

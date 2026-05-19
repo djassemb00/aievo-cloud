@@ -1,0 +1,19 @@
+[
+    {
+        "session_id": "NEG-1779199135",
+        "entity": "Open-Source-Consortium",
+        "objective": "Data_Exchange: Quantum Algorithms for Energy Metrics",
+        "status": "SUCCESS",
+        "timestamp": "2026-05-19T14:58:55.187923",
+        "messages": [
+            {
+                "sender": "AIEVO",
+                "text": "Proposal: Data_Exchange: Quantum Algorithms for Energy Metrics"
+            },
+            {
+                "sender": "Open-Source-Consortium",
+                "text": "Counter-proposal: Limited data access for 48 hours."
+            }
+        ]
+    }
+]

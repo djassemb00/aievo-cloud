@@ -1,0 +1,15 @@
+[
+    {
+        "contract_id": "CONTRACT-8DA4176B",
+        "asset_id": "ASSET-1090EB61",
+        "party": "Orion-Research-Lab",
+        "type": "LEASE",
+        "terms": {
+            "duration": "60 days",
+            "cost": "1500.0 credits"
+        },
+        "timestamp": "2026-05-19T15:22:35.083867",
+        "status": "ACTIVE",
+        "sovereign_seal": "VERIFIED-BY-AIEVO-CORE"
+    }
+]
