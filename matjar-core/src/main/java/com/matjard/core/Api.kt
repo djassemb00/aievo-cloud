@@ -138,6 +138,10 @@ interface PostgrestApi {
     @PATCH("rest/v1/admin_notifications")
     suspend fun updateAdminNotification(@Query("id") idFilter: String, @Body fields: Map<String, @JvmSuppressWildcards Any?>): Response<ResponseBody>
 
+    // ---- RPC: create admin notification --------------------------------------
+    @POST("rest/v1/rpc/create_admin_notification")
+    suspend fun createAdminNotification(@Body body: CreateAdminNotificationRequest): Response<CreateAdminNotificationResult>
+
     // ---- RPC: make first user owner ------------------------------------------
     @POST("rest/v1/rpc/set_owner_if_first")
     suspend fun setOwnerIfFirst(@Body body: RoleRequest): Response<RoleResult>
@@ -163,6 +167,14 @@ data class AdminNotification(
     @SerializedName("is_read") val isRead: Boolean,
     @SerializedName("created_at") val createdAt: String,
 )
+
+// طلب إنشاء إشعار إداري
+data class CreateAdminNotificationRequest(
+    @SerializedName("p_title") val title: String,
+    @SerializedName("p_message") val message: String,
+    @SerializedName("p_type") val type: String = "info",
+)
+data class CreateAdminNotificationResult(@SerializedName("success") val success: Boolean = false)
 
 interface StorageApi {
     @POST("storage/v1/object/product-images/{file}")

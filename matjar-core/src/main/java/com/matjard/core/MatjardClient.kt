@@ -316,7 +316,7 @@ class MatjardClient(context: Context) {
             .header("Content-Type", "application/json")
             .post(requestBody)
             .build()
-        val client = okHttpClient
+        val client = okhttp3.OkHttpClient()
         val response = client.newCall(request).execute()
         val responseBody = response.body()?.string() ?: ""
         response.close()
