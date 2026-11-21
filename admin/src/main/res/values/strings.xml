@@ -167,8 +167,6 @@
     <string name="unknown_email">بريد غير معروف</string>
     <string name="close">إغلاق</string>
     <string name="full_name">الاسم الكامل</string>
-    <string name="phone">رقم الهاتف</string>
     <string name="hire_date">تاريخ التوظيف</string>
     <string name="salary">الراتب (د.ج)</string>
-    <string name="address">العنوان</string>
 </resources>
