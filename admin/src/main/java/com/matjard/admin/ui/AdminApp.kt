@@ -44,6 +44,10 @@ import com.matjard.admin.ui.screens.CategoriesScreen
 import com.matjard.admin.ui.screens.DashboardScreen
 import com.matjard.admin.ui.screens.LoginScreen
 import com.matjard.admin.ui.screens.MoreScreen
+<<<<<<< HEAD
+=======
+import com.matjard.admin.ui.screens.NotificationsScreen
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
 import com.matjard.admin.ui.screens.OrdersScreen
 import com.matjard.admin.ui.screens.ProductsScreen
 import com.matjard.admin.ui.screens.ProductEditScreen
@@ -57,6 +61,10 @@ private sealed interface Overlay {
     data class ProductEdit(val product: Product?) : Overlay
     data object Banners : Overlay
     data object Settings : Overlay
+<<<<<<< HEAD
+=======
+    data object Notifications : Overlay
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,6 +77,10 @@ fun AdminApp() {
     var sessionChecked by remember { mutableStateOf(false) }
     var showingSignUp by remember { mutableStateOf(false) }
     var showingEmployees by remember { mutableStateOf(false) }
+<<<<<<< HEAD
+=======
+    var showingNotifications by remember { mutableStateOf(false) }
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
     // زر التسجيل الذاتي يظهر فقط إذا لم يكن هناك أي مسؤول بعد (أول responsible يسجل يصبح مالكاً)
     var showSignUp by remember { mutableStateOf(true) }
 
@@ -136,10 +148,25 @@ fun AdminApp() {
         return
     }
 
+<<<<<<< HEAD
+=======
+    if (showingNotifications) {
+        NotificationsScreen(
+            client = client,
+            onClose = { showingNotifications = false },
+        )
+        return
+    }
+
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
     AdminScaffold(
         client = client,
         onSignOut = { client.signOut(); signedIn = false },
         onOpenEmployees = { showingEmployees = true },
+<<<<<<< HEAD
+=======
+        onOpenNotifications = { showingNotifications = true },
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
     )
 }
 
@@ -149,6 +176,10 @@ private fun AdminScaffold(
     client: MatjardClient,
     onSignOut: () -> Unit,
     onOpenEmployees: () -> Unit,
+<<<<<<< HEAD
+=======
+    onOpenNotifications: () -> Unit,
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
 ) {
     val lang = client.language.lang()
 
@@ -172,6 +203,13 @@ private fun AdminScaffold(
             SettingsScreen(client = client, onClose = { closeOverlay() })
             return
         }
+<<<<<<< HEAD
+=======
+        Overlay.Notifications -> {
+            NotificationsScreen(client = client, onClose = { closeOverlay() })
+            return
+        }
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
         null -> Unit
     }
 
@@ -236,6 +274,10 @@ private fun AdminScaffold(
                     lang = lang,
                     onOpenSettings = { overlay = Overlay.Settings },
                     onOpenBanners = { overlay = Overlay.Banners },
+<<<<<<< HEAD
+=======
+                    onOpenNotifications = { overlay = Overlay.Notifications },
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
                     isManager = true,
                 )
             }

@@ -167,6 +167,7 @@
     <string name="no_employees_yet">لا يوجد موظفون مسجلون بعد</string>
     <string name="unknown_email">بريد غير معروف</string>
     <string name="close">إغلاق</string>
+    <string name="refresh">تحديث</string>
     <string name="full_name">الاسم الكامل</string>
     <string name="hire_date">تاريخ التوظيف</string>
     <string name="salary">الراتب (د.ج)</string>
@@ -184,4 +185,15 @@
     <string name="verifying">جاري التحقق…</string>
     <string name="change_email">تغيير البريد الإلكتروني</string>
     <string name="code_sent_info">تم إرسال رمز التحقق إلى بريدك. ينتهي صلاحية الرمز بعد دقيقة واحدة.</string>
+
+    <!-- Notifications -->
+    <string name="notifications_title">الإشعارات</string>
+    <string name="notifications_unread">غير مقروء</string>
+    <string name="notifications_empty">لا توجد إشعارات بعد</string>
+    <string name="notify_info">معلومات</string>
+    <string name="notify_warning">تحذير</string>
+    <string name="notify_error">خطأ</string>
+    <string name="notify_success">نجاح</string>
+    <string name="mark_read">مقروء</string>
+    <string name="mark_unread">غير مقروء</string>
 </resources>

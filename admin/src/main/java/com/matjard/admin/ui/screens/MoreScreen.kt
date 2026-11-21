@@ -43,6 +43,10 @@ fun MoreScreen(
     lang: String,
     onOpenSettings: () -> Unit,
     onOpenBanners: () -> Unit,
+<<<<<<< HEAD
+=======
+    onOpenNotifications: () -> Unit,
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
     isManager: Boolean = true,
 ) {
     val context = LocalContext.current
@@ -80,6 +84,16 @@ fun MoreScreen(
                 chevronRtl = rtl,
                 onClick = onOpenBanners,
             )
+<<<<<<< HEAD
+=======
+            Spacer(Modifier.height(8.dp))
+            NavRow(
+                icon = Icons.Filled.Notifications,
+                label = stringResource(R.string.notifications_title),
+                chevronRtl = rtl,
+                onClick = onOpenNotifications,
+            )
+>>>>>>> 5425fa1 (feat: add admin notifications screen)
         }
 
         Spacer(Modifier.height(22.dp))

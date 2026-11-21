@@ -157,6 +157,7 @@
     <string name="no_employees_yet">Aucun employé enregistré pour le moment</string>
     <string name="unknown_email">Email inconnu</string>
     <string name="close">Fermer</string>
+    <string name="refresh">Actualiser</string>
     <string name="full_name">Nom complet</string>
     <string name="hire_date">Date d embauche</string>
     <string name="salary">Salaire (DA)</string>
@@ -174,4 +175,15 @@
     <string name="verifying">Verification en cours</string>
     <string name="change_email">Changer email</string>
     <string name="code_sent_info">Un code de vérification a été envoyé à votre e-mail. Le code expire après une minute.</string>
+
+    <!-- Notifications -->
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_unread">non lues</string>
+    <string name="notifications_empty">Aucune notification pour le moment</string>
+    <string name="notify_info">Information</string>
+    <string name="notify_warning">Avertissement</string>
+    <string name="notify_error">Erreur</string>
+    <string name="notify_success">Succès</string>
+    <string name="mark_read">Lu</string>
+    <string name="mark_unread">Non lu</string>
 </resources>
