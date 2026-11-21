@@ -184,7 +184,7 @@ fun EmployeesScreen(
                             if (expandedUserId == user.id) {
                                 ExposedDropdownMenuBox(
                                     expanded = true,
-                                    onExpansionChange = { expanded = it },
+                                    onExpandedChange = { expanded = it },
                                     modifier = Modifier.align(Alignment.CenterVertically),
                                 ) {
                                     ExposedDropdownMenu(
