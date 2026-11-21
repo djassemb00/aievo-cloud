@@ -182,5 +182,10 @@ data class AdminUserRow(val id: String)
 data class AdminUser(
     val id: String,
     val email: String?,
+    @SerializedName("full_name") val fullName: String? = null,
+    @SerializedName("phone") val phone: String? = null,
+    @SerializedName("hire_date") val hireDate: String? = null,
+    @SerializedName("salary") val salary: Double? = null,
+    @SerializedName("address") val address: String? = null,
     @SerializedName("role") val role: String, // owner | manager | staff
 )

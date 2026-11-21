@@ -156,4 +156,9 @@
     <string name="no_employees_yet">Aucun employé enregistré pour le moment</string>
     <string name="unknown_email">Email inconnu</string>
     <string name="close">Fermer</string>
+    <string name="full_name">Nom complet</string>
+    <string name="phone">Numéro de téléphone</string>
+    <string name="hire_date">Date d'embauche</string>
+    <string name="salary">Salaire (DA)</string>
+    <string name="address">Adresse</string>
 </resources>
