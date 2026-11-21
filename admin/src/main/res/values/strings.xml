@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">متجر D — الإدارة</string>
+    <string name="admin_panel">لوحة الإدارة</string>
+
+    <!-- Login -->
+    <string name="login_title">تسجيل الدخول</string>
+    <string name="login_subtitle">لوحة تحكم متجر D</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="sign_in">دخول</string>
+    <string name="signing_in">جاري الدخول…</string>
+    <string name="invalid_credentials">بريد إلكتروني أو كلمة مرور خاطئة</string>
+    <string name="not_admin">هذا الحساب غير مخوّل لإدارة المتجر. أضفه إلى جدول admin_users أولاً.</string>
+    <string name="login_error">تعذر تسجيل الدخول. تحقق من الاتصال وحاول مجدداً.</string>
+    <string name="first_time_hint">أول مرة؟ أنشئ حسابك من زر «إنشاء حساب» أدناه، ثم شغّل الأمر الموثّق في README لترقية حسابك إلى مسؤول.</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="creating_account">جاري إنشاء الحساب…</string>
+    <string name="account_created">تم إنشاء الحساب. راجع بريدك الإلكتروني لتأكيد التسجيل إذا كانت الخاصية مفعّلة.</string>
+    <string name="already_have_account">لديك حساب بالفعل؟ دخول</string>
+    <string name="sign_up_title">إنشاء حساب مسؤول</string>
+    <string name="sign_up_subtitle">أنشئ حسابك لإدارة متجر D</string>
+    <string name="sign_up_error">تعذر إنشاء الحساب. تحقق من البريد وحاول مجدداً.</string>
+    <string name="signed_in_as">مسجّل الدخول بـ</string>
+    <string name="sign_out">تسجيل الخروج</string>
+
+    <!-- Tabs -->
+    <string name="tab_dashboard">الرئيسية</string>
+    <string name="tab_orders">الطلبات</string>
+    <string name="tab_products">المنتجات</string>
+    <string name="tab_categories">الأقسام</string>
+    <string name="tab_more">المزيد</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">نظرة عامة</string>
+    <string name="stat_today_orders">طلبات اليوم</string>
+    <string name="stat_today_sales">مبيعات اليوم</string>
+    <string name="stat_new_orders">طلبات جديدة</string>
+    <string name="stat_low_stock">مخزون منخفض</string>
+    <string name="recent_orders">آخر الطلبات</string>
+    <string name="view_all_orders">عرض الكل</string>
+    <string name="no_orders_yet">لا توجد طلبات بعد</string>
+
+    <!-- Orders -->
+    <string name="orders_title">الطلبات</string>
+    <string name="filter_all">الكل</string>
+    <string name="status_new">جديدة</string>
+    <string name="status_preparing">قيد التحضير</string>
+    <string name="status_out_for_delivery">خرج للتوصيل</string>
+    <string name="status_delivered">تم التسليم</string>
+    <string name="status_cancelled">ملغاة</string>
+    <string name="order_n">طلب رقم %1$s</string>
+    <string name="customer">الزبون</string>
+    <string name="wilaya">الولاية</string>
+    <string name="address">العنوان</string>
+    <string name="note">ملاحظات</string>
+    <string name="items">المنتجات</string>
+    <string name="call_customer">اتصل بالزبون</string>
+    <string name="whatsapp_customer">واتساب</string>
+    <string name="start_preparing">بدء التحضير</string>
+    <string name="mark_out">خروج للتوصيل</string>
+    <string name="mark_delivered">تم التسليم</string>
+    <string name="cancel_order">إلغاء الطلب</string>
+    <string name="delivery_fee">التوصيل</string>
+    <string name="delivery_fee_label">رسوم التوصيل (د.ج)</string>
+    <string name="total">الإجمالي</string>
+    <string name="subtotal">المجموع الفرعي</string>
+    <string name="free">مجاني</string>
+
+    <!-- Products -->
+    <string name="products_title">المنتجات</string>
+    <string name="add_product">إضافة منتج</string>
+    <string name="edit_product">تعديل المنتج</string>
+    <string name="new_product">منتج جديد</string>
+    <string name="search_products">ابحث عن منتج…</string>
+    <string name="name_ar">الاسم بالعربية *</string>
+    <string name="name_fr">الاسم بالفرنسية *</string>
+    <string name="description_ar">الوصف بالعربية</string>
+    <string name="description_fr">الوصف بالفرنسية</string>
+    <string name="brand">الماركة</string>
+    <string name="sku">المرجع (SKU)</string>
+    <string name="price">السعر (د.ج) *</string>
+    <string name="old_price">السعر قبل الخصم (اختياري)</string>
+    <string name="stock">المخزون</string>
+    <string name="category">القسم *</string>
+    <string name="image_url">رابط الصورة</string>
+    <string name="pick_from_gallery">اختر من المعرض</string>
+    <string name="uploading_image">جاري رفع الصورة…</string>
+    <string name="image_too_big">الصورة أكبر من 5MB</string>
+    <string name="featured">منتج مميز (يظهر في العروض)</string>
+    <string name="active">ظاهر في تطبيق الزبون</string>
+    <string name="save">حفظ</string>
+    <string name="saving">جاري الحفظ…</string>
+    <string name="delete">حذف</string>
+    <string name="delete_product_confirm">حذف هذا المنتج نهائياً؟</string>
+    <string name="active_short">نشط</string>
+    <string name="inactive_short">مخفي</string>
+    <string name="in_stock">متوفر (%1$d)</string>
+    <string name="low_stock_badge">منخفض (%1$d)</string>
+    <string name="out_badge">نفذ</string>
+    <string name="required_fields">أكمل الحقول المطلوبة (الاسم باللغتين، القسم، السعر)</string>
+
+    <!-- Categories -->
+    <string name="categories_title">الأقسام</string>
+    <string name="add_category">إضافة قسم</string>
+    <string name="edit_category">تعديل القسم</string>
+    <string name="icon_key">الأيقونة</string>
+    <string name="sort_order">الترتيب</string>
+    <string name="delete_category_confirm">حذف هذا القسم مع كل منتجاته؟! لا يمكن التراجع.</string>
+
+    <!-- Banners -->
+    <string name="banners_title">العروض والإعلانات</string>
+    <string name="banners_subtitle">تظهر في أعلى الشاشة الرئيسية في تطبيق الزبون</string>
+    <string name="add_banner">إضافة إعلان</string>
+    <string name="edit_banner">تعديل الإعلان</string>
+    <string name="title_ar">العنوان بالعربية *</string>
+    <string name="title_fr">العنوان بالفرنسية *</string>
+    <string name="subtitle_ar">السطر الفرعي بالعربية</string>
+    <string name="subtitle_fr">السطر الفرعي بالفرنسية</string>
+    <string name="delete_banner_confirm">حذف هذا الإعلان؟</string>
+
+    <!-- Settings -->
+    <string name="settings_title">إعدادات المتجر</string>
+    <string name="settings_subtitle">تظهر هذه المعلومات في تطبيق الزبون — أي تعديل هنا ينعكس فوراً</string>
+    <string name="store_name_ar">اسم المتجر بالعربية</string>
+    <string name="store_name_fr">اسم المتجر بالفرنسية</string>
+    <string name="phone">الهاتف</string>
+    <string name="whatsapp">واتساب (بالصيغة الدولية، مثل 213555000000)</string>
+    <string name="address_ar">العنوان بالعربية</string>
+    <string name="address_fr">العنوان بالفرنسية</string>
+    <string name="hours_ar">أوقات العمل بالعربية</string>
+    <string name="hours_fr">أوقات العمل بالفرنسية</string>
+    <string name="free_delivery_min">التوصيل مجاني فوق (د.ج)</string>
+    <string name="facebook_url">رابط فيسبوك</string>
+    <string name="instagram_url">رابط إنستغرام</string>
+    <string name="tiktok_url">رابط تيك توك</string>
+    <string name="saved_ok">تم الحفظ ✓</string>
+    <string name="save_changes">حفظ التغييرات</string>
+
+    <!-- More -->
+    <string name="more_title">المزيد</string>
+    <string name="store_settings">إعدادات المتجر</string>
+    <string name="banners_row">العروض والإعلانات</string>
+    <string name="language">اللغة / Langue</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_fr">Français</string>
+    <string name="app_version">الإصدار %1$s</string>
+
+    <!-- Common -->
+    <string name="save_error">تعذر الحفظ</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="loading">جاري التحميل…</string>
+    <string name="error_generic">تعذر تحميل البيانات. تحقق من الاتصال.</string>
+    <string name="cancel">إلغاء</string>
+    <string name="cancel_order_confirm">هل تريد إلغاء هذا الطلب؟ سيتم تحديث حالته إلى «ملغاة».</string>
+    <string name="confirm">تأكيد</string>
+    <string name="ok">حسناً</string>
+
+    <!-- Employees & Roles -->
+    <string name="employees_title">الموظفون والصلاحيات</string>
+    <string name="employees_subtitle">إدارة حسابات الموظفين وصلاحياتهم (للمالك فقط)</string>
+    <string name="add_employee">إضافة موظف</string>
+    <string name="add_employee_btn">إضافة موظف جديد</string>
+    <string name="select_role">اختر الرتبة</string>
+    <string name="role">الرتبة</string>
+    <string name="no_employees_yet">لا يوجد موظفون مسجلون بعد</string>
+    <string name="unknown_email">بريد غير معروف</string>
+    <string name="close">إغلاق</string>
+</resources>

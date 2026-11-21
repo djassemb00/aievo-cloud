@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">متجر D</string>
+
+    <!-- Home / catalog -->
+    <string name="search_hint">ابحث عن منتج، ماركة…</string>
+    <string name="categories_title">الأقسام</string>
+    <string name="featured_title">عروض مميزة</string>
+    <string name="all_products_title">كل المنتجات</string>
+    <string name="search_results">نتائج البحث (%1$d)</string>
+    <string name="no_results">لا توجد نتائج مطابقة</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="error_generic">تعذر تحميل البيانات. تحقق من الاتصال بالإنترنت.</string>
+    <string name="loading">جاري التحميل…</string>
+    <string name="see_all">عرض الكل</string>
+
+    <!-- Product -->
+    <string name="in_stock">متوفر</string>
+    <string name="low_stock">بقي %1$d قطع فقط!</string>
+    <string name="out_of_stock">غير متوفر</string>
+    <string name="add_to_cart">أضف إلى السلة</string>
+    <string name="added_to_cart">أُضيفت إلى السلة</string>
+    <string name="quantity">الكمية</string>
+    <string name="brand">الماركة</string>
+    <string name="sku">المرجع</string>
+    <string name="call_store">اتصل بالمتجر</string>
+    <string name="whatsapp">واتساب</string>
+    <string name="discount_off">-%1$d%%</string>
+
+    <!-- Cart -->
+    <string name="cart_title">سلة التسوق</string>
+    <string name="cart_empty">سلتك فارغة</string>
+    <string name="cart_empty_hint">تصفح منتجاتنا وأضف ما يعجبك</string>
+    <string name="browse_products">تصفح المنتجات</string>
+    <string name="subtotal">المجموع الفرعي</string>
+    <string name="delivery_fee">رسوم التوصيل</string>
+    <string name="delivery_free">مجاني</string>
+    <string name="total">الإجمالي</string>
+    <string name="free_delivery_progress">أضف %1$s للتوصيل المجاني</string>
+    <string name="free_delivery_reached">مبروك! التوصيل مجاني</string>
+    <string name="go_checkout">إتمام الطلب</string>
+    <string name="cod_note">الدفع عند الاستلام — لا دفع إلكتروني</string>
+    <string name="remove">إزالة</string>
+    <string name="items_count">%1$d منتجات في السلة</string>
+
+    <!-- Checkout -->
+    <string name="checkout_title">إتمام الطلب</string>
+    <string name="your_info">معلوماتك</string>
+    <string name="full_name">الاسم الكامل *</string>
+    <string name="phone">رقم الهاتف *</string>
+    <string name="wilaya">الولاية *</string>
+    <string name="address">العنوان بالتفصيل (الحي، الشارع، رقم العمارة) *</string>
+    <string name="note">ملاحظات للطلب (اختياري)</string>
+    <string name="full_name_required">الاسم مطلوب</string>
+    <string name="phone_invalid">رقم هاتف غير صالح — اكتب 9–10 أرقام على الأقل</string>
+    <string name="wilaya_required">اختر ولايتك</string>
+    <string name="address_required">العنوان مطلوب</string>
+    <string name="confirm_order">تأكيد الطلب</string>
+    <string name="placing_order">جاري إرسال الطلب…</string>
+    <string name="place_order_error">تعذر إرسال الطلب. حاول مرة أخرى.</string>
+    <string name="order_summary">ملخص الطلب</string>
+    <string name="order_items">%1$d منتج(ات)</string>
+
+    <!-- Success -->
+    <string name="order_placed">شكراً لك! تم استلام طلبك</string>
+    <string name="order_placed_hint">سنتصل بك قريباً لتأكيد الطلب والتوصيل. احتفظ برقم الطلب:</string>
+    <string name="order_code">رقم طلبك</string>
+    <string name="track_my_order">تتبع طلبي</string>
+    <string name="back_to_shop">متابعة التسوق</string>
+
+    <!-- Track -->
+    <string name="track_title">تتبع الطلب</string>
+    <string name="track_hint">أدخل رقم الطلب ورقم هاتفك المستخدم عند الطلب</string>
+    <string name="order_number">رقم الطلب (مثال: 7)</string>
+    <string name="track">تتبع</string>
+    <string name="track_searching">جاري البحث…</string>
+    <string name="track_not_found">لا يوجد طلب مطابق — تأكد من الرقم والهاتف</string>
+    <string name="track_result">تفاصيل الطلب %1$s</string>
+
+    <!-- Status -->
+    <string name="status_new">قيد المراجعة</string>
+    <string name="status_preparing">قيد التحضير</string>
+    <string name="status_out_for_delivery">خرج للتوصيل</string>
+    <string name="status_delivered">تم التسليم</string>
+    <string name="status_cancelled">ملغى</string>
+
+    <!-- About -->
+    <string name="about_title">عن المتجر</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="working_hours">أوقات العمل</string>
+    <string name="language">اللغة / Langue</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_fr">Français</string>
+    <string name="delivery_info">التوصيل: %1$s — مجاني للطلبات فوق %2$s</string>
+    <string name="app_version">الإصدار %1$s</string>
+    <string name="cash_on_delivery">الدفع عند الاستلام</string>
+</resources>

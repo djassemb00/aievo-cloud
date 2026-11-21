@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Matjar D — Admin</string>
+    <string name="admin_panel">Panneau d’administration</string>
+
+    <string name="login_title">Connexion</string>
+    <string name="login_subtitle">Panneau de gestion Matjar D</string>
+    <string name="email">E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="sign_in">Se connecter</string>
+    <string name="signing_in">Connexion…</string>
+    <string name="invalid_credentials">E-mail ou mot de passe incorrect</string>
+    <string name="not_admin">Ce compte n’est pas autorisé à gérer le magasin. Ajoutez-le à la table admin_users.</string>
+    <string name="login_error">Échec de la connexion. Vérifiez votre réseau.</string>
+    <string name="first_time_hint">Première fois ? Créez votre compte avec le bouton « Créer un compte » ci-dessous, puis exécutez la commande documentée dans le README pour passer votre compte en administrateur.</string>
+    <string name="create_account">Créer un compte</string>
+    <string name="creating_account">Création du compte…</string>
+    <string name="account_created">Compte créé. Consultez votre e-mail pour confirmer l’inscription si l’option est activée.</string>
+    <string name="already_have_account">Vous avez déjà un compte ? Se connecter</string>
+    <string name="sign_up_title">Créer un compte administrateur</string>
+    <string name="sign_up_subtitle">Créez votre compte pour gérer Matjar D</string>
+    <string name="sign_up_error">Impossible de créer le compte. Vérifiez l’adresse e-mail et réessayez.</string>
+    <string name="signed_in_as">Connecté en tant que</string>
+    <string name="sign_out">Se déconnecter</string>
+
+    <string name="tab_dashboard">Accueil</string>
+    <string name="tab_orders">Commandes</string>
+    <string name="tab_products">Produits</string>
+    <string name="tab_categories">Catégories</string>
+    <string name="tab_more">Plus</string>
+
+    <string name="dashboard_title">Vue d’ensemble</string>
+    <string name="stat_today_orders">Commandes du jour</string>
+    <string name="stat_today_sales">CA du jour</string>
+    <string name="stat_new_orders">Nouvelles</string>
+    <string name="stat_low_stock">Stock faible</string>
+    <string name="recent_orders">Dernières commandes</string>
+    <string name="view_all_orders">Tout voir</string>
+    <string name="no_orders_yet">Aucune commande pour l’instant</string>
+
+    <string name="orders_title">Commandes</string>
+    <string name="filter_all">Toutes</string>
+    <string name="status_new">Nouvelle</string>
+    <string name="status_preparing">En préparation</string>
+    <string name="status_out_for_delivery">En livraison</string>
+    <string name="status_delivered">Livrée</string>
+    <string name="status_cancelled">Annulée</string>
+    <string name="order_n">Commande %1$s</string>
+    <string name="customer">Client</string>
+    <string name="wilaya">Wilaya</string>
+    <string name="address">Adresse</string>
+    <string name="note">Remarque</string>
+    <string name="items">Articles</string>
+    <string name="call_customer">Appeler le client</string>
+    <string name="whatsapp_customer">WhatsApp</string>
+    <string name="start_preparing">Commencer la préparation</string>
+    <string name="mark_out">Sortir pour livraison</string>
+    <string name="mark_delivered">Marquer livrée</string>
+    <string name="cancel_order">Annuler la commande</string>
+    <string name="delivery_fee">Livraison</string>
+    <string name="delivery_fee_label">Frais de livraison (DA)</string>
+    <string name="total">Total</string>
+    <string name="subtotal">Sous-total</string>
+    <string name="free">Gratuite</string>
+
+    <string name="products_title">Produits</string>
+    <string name="add_product">Ajouter un produit</string>
+    <string name="edit_product">Modifier le produit</string>
+    <string name="new_product">Nouveau produit</string>
+    <string name="search_products">Rechercher un produit…</string>
+    <string name="name_ar">Nom en arabe *</string>
+    <string name="name_fr">Nom en français *</string>
+    <string name="description_ar">Description en arabe</string>
+    <string name="description_fr">Description en français</string>
+    <string name="brand">Marque</string>
+    <string name="sku">Référence (SKU)</string>
+    <string name="price">Prix (DA) *</string>
+    <string name="old_price">Prix avant remise (optionnel)</string>
+    <string name="stock">Stock</string>
+    <string name="category">Catégorie *</string>
+    <string name="image_url">URL de l’image</string>
+    <string name="pick_from_gallery">Choisir depuis la galerie</string>
+    <string name="uploading_image">Envoi de l’image…</string>
+    <string name="image_too_big">Image de plus de 5 Mo</string>
+    <string name="featured">Produit vedette (vitrine)</string>
+    <string name="active">Visible dans l’app client</string>
+    <string name="save">Enregistrer</string>
+    <string name="saving">Enregistrement…</string>
+    <string name="delete">Supprimer</string>
+    <string name="delete_product_confirm">Supprimer définitivement ce produit ?</string>
+    <string name="active_short">Actif</string>
+    <string name="inactive_short">Masqué</string>
+    <string name="in_stock">En stock (%1$d)</string>
+    <string name="low_stock_badge">Faible (%1$d)</string>
+    <string name="out_badge">Épuisé</string>
+    <string name="required_fields">Remplissez les champs obligatoires (nom arabe + français, catégorie, prix)</string>
+
+    <string name="categories_title">Catégories</string>
+    <string name="add_category">Ajouter une catégorie</string>
+    <string name="edit_category">Modifier la catégorie</string>
+    <string name="icon_key">Icône</string>
+    <string name="sort_order">Ordre</string>
+    <string name="delete_category_confirm">Supprimer cette catégorie avec tous ses produits ? Action irréversible.</string>
+
+    <string name="banners_title">Bannières et offres</string>
+    <string name="banners_subtitle">Affichées en haut de l’accueil de l’app client</string>
+    <string name="add_banner">Ajouter une bannière</string>
+    <string name="edit_banner">Modifier la bannière</string>
+    <string name="title_ar">Titre en arabe *</string>
+    <string name="title_fr">Titre en français *</string>
+    <string name="subtitle_ar">Sous-titre en arabe</string>
+    <string name="subtitle_fr">Sous-titre en français</string>
+    <string name="delete_banner_confirm">Supprimer cette bannière ?</string>
+
+    <string name="settings_title">Paramètres du magasin</string>
+    <string name="settings_subtitle">Ces informations s’affichent dans l’app client — toute modification est instantanée</string>
+    <string name="store_name_ar">Nom du magasin (arabe)</string>
+    <string name="store_name_fr">Nom du magasin (français)</string>
+    <string name="phone">Téléphone</string>
+    <string name="whatsapp">WhatsApp (format international, ex. 213555000000)</string>
+    <string name="address_ar">Adresse (arabe)</string>
+    <string name="address_fr">Adresse (français)</string>
+    <string name="hours_ar">Horaires (arabe)</string>
+    <string name="hours_fr">Horaires (français)</string>
+    <string name="free_delivery_min">Livraison gratuite dès (DA)</string>
+    <string name="facebook_url">Lien Facebook</string>
+    <string name="instagram_url">Lien Instagram</string>
+    <string name="tiktok_url">Lien TikTok</string>
+    <string name="saved_ok">Enregistré ✓</string>
+    <string name="save_changes">Enregistrer</string>
+
+    <string name="more_title">Plus</string>
+    <string name="store_settings">Paramètres du magasin</string>
+    <string name="banners_row">Bannières et offres</string>
+    <string name="language">اللغة / Langue</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_fr">Français</string>
+    <string name="app_version">Version %1$s</string>
+
+    <string name="save_error">Échec de l’enregistrement</string>
+    <string name="retry">Réessayer</string>
+    <string name="loading">Chargement…</string>
+    <string name="error_generic">Échec du chargement. Vérifiez votre connexion.</string>
+    <string name="cancel">Annuler</string>
+    <string name="cancel_order_confirm">Annuler cette commande ? Son statut passera à « Annulée ».</string>
+    <string name="confirm">Confirmer</string>
+    <string name="ok">OK</string>
+
+    <!-- Employees & Roles -->
+    <string name="employees_title">Employés et permissions</string>
+    <string name="employees_subtitle">Gestion des comptes employés et de leurs permissions (propriétaire uniquement)</string>
+    <string name="add_employee">Ajouter un employé</string>
+    <string name="add_employee_btn">Ajouter un nouvel employé</string>
+    <string name="select_role">Choisir le rôle</string>
+    <string name="role">Rôle</string>
+    <string name="no_employees_yet">Aucun employé enregistré pour l'instant</string>
+    <string name="unknown_email">Email inconnu</string>
+    <string name="close">Fermer</string>
+</resources>

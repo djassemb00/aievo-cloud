@@ -1,0 +1,87 @@
+name: Build Matjar D APKs
+
+permissions:
+  contents: write
+
+on:
+  push:
+    paths:
+      - 'customer/**'
+      - 'admin/**'
+      - 'matjar-core/**'
+      - 'settings.gradle'
+      - 'gradle/**'
+      - 'gradle.properties'
+      - 'build.gradle'
+      - '.github/workflows/build-apk.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build customer + admin debug APKs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build debug APKs
+        run: |
+          set +e
+          bash ./gradlew :customer:assembleDebug :admin:assembleDebug --console=plain --stacktrace > build.log 2>&1
+          code=$?
+          tail -n 30 build.log
+          if [ "$code" -ne 0 ]; then
+            grep -E '^e: |error:|FAILED|What went wrong|Could not|Exception|Execution failed|Caused by' build.log | sed 's|file:///home/runner/work/[^/]*/[^/]*/||g' | head -40 | while IFS= read -r line; do
+              line=$(printf '%s' "$line" | tr -d '\r' | cut -c1-450)
+              echo "::error title=gradle::$line"
+            done
+            exit "$code"
+          fi
+
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Rename APKs
+        run: |
+          mkdir -p apks
+          cp customer/build/outputs/apk/debug/customer-debug.apk apks/MatjarD-Customer.apk
+          cp admin/build/outputs/apk/debug/admin-debug.apk apks/MatjarD-Admin.apk
+
+      - name: Upload APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: matjar-d-apks
+          path: apks/*.apk
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Publish rolling release with APKs
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: matjar-d-latest
+          name: Matjar D — APKs (debug)
+          prerelease: true
+          body: |
+            Debug APKs built from the latest commit on this branch.
+
+            - **MatjarD-Customer.apk** — تطبيق الزبون (customer app)
+            - **MatjarD-Admin.apk** — تطبيق المسؤول (owner/admin app)
+
+            Both are debug-signed and install directly on any Android device (enable "Install unknown apps").
+            See docs/MATJAR_D.md for setup (admin account creation) and release-signing instructions.
+          files: apks/*.apk

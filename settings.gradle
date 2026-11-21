@@ -22,5 +22,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AI EVO"
+rootProject.name = "Matjar D"
 include ':app'
+include ':matjar-core'
+include ':customer'
+include ':admin'

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Matjar D</string>
+
+    <string name="search_hint">Rechercher un produit, une marque…</string>
+    <string name="categories_title">Catégories</string>
+    <string name="featured_title">Offres du moment</string>
+    <string name="all_products_title">Tous les produits</string>
+    <string name="search_results">Résultats (%1$d)</string>
+    <string name="no_results">Aucun résultat</string>
+    <string name="retry">Réessayer</string>
+    <string name="error_generic">Impossible de charger les données. Vérifiez votre connexion.</string>
+    <string name="loading">Chargement…</string>
+    <string name="see_all">Voir tout</string>
+
+    <string name="in_stock">En stock</string>
+    <string name="low_stock">Plus que %1$d pièces !</string>
+    <string name="out_of_stock">Rupture de stock</string>
+    <string name="add_to_cart">Ajouter au panier</string>
+    <string name="added_to_cart">Ajouté au panier</string>
+    <string name="quantity">Quantité</string>
+    <string name="brand">Marque</string>
+    <string name="sku">Référence</string>
+    <string name="call_store">Appeler le magasin</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="discount_off">-%1$d%%</string>
+
+    <string name="cart_title">Mon panier</string>
+    <string name="cart_empty">Votre panier est vide</string>
+    <string name="cart_empty_hint">Parcourez nos produits et ajoutez ce qui vous plaît</string>
+    <string name="browse_products">Voir les produits</string>
+    <string name="subtotal">Sous-total</string>
+    <string name="delivery_fee">Livraison</string>
+    <string name="delivery_free">Gratuite</string>
+    <string name="total">Total</string>
+    <string name="free_delivery_progress">Plus que %1$s pour la livraison gratuite</string>
+    <string name="free_delivery_reached">Bravo ! Livraison gratuite</string>
+    <string name="go_checkout">Commander</string>
+    <string name="cod_note">Paiement à la livraison — aucun paiement en ligne</string>
+    <string name="remove">Retirer</string>
+    <string name="items_count">%1$d article(s) dans le panier</string>
+
+    <string name="checkout_title">Finaliser la commande</string>
+    <string name="your_info">Vos informations</string>
+    <string name="full_name">Nom complet *</string>
+    <string name="phone">Téléphone *</string>
+    <string name="wilaya">Wilaya *</string>
+    <string name="address">Adresse détaillée (quartier, rue, immeuble) *</string>
+    <string name="note">Remarque pour la commande (optionnel)</string>
+    <string name="full_name_required">Le nom est requis</string>
+    <string name="phone_invalid">Numéro invalide — 9 à 10 chiffres minimum</string>
+    <string name="wilaya_required">Choisissez votre wilaya</string>
+    <string name="address_required">L’adresse est requise</string>
+    <string name="confirm_order">Confirmer la commande</string>
+    <string name="placing_order">Envoi de la commande…</string>
+    <string name="place_order_error">Échec de la commande. Réessayez.</string>
+    <string name="order_summary">Résumé</string>
+    <string name="order_items">%1$d article(s)</string>
+
+    <string name="order_placed">Merci ! Votre commande est bien reçue</string>
+    <string name="order_placed_hint">Nous vous appelons bientôt pour confirmer. Gardez votre numéro de commande :</string>
+    <string name="order_code">Votre commande</string>
+    <string name="track_my_order">Suivre ma commande</string>
+    <string name="back_to_shop">Continuer mes achats</string>
+
+    <string name="track_title">Suivi de commande</string>
+    <string name="track_hint">Entrez le numéro de commande et le téléphone utilisé</string>
+    <string name="order_number">N° de commande (ex : 7)</string>
+    <string name="track">Suivre</string>
+    <string name="track_searching">Recherche…</string>
+    <string name="track_not_found">Aucune commande trouvée — vérifiez le numéro et le téléphone</string>
+    <string name="track_result">Détails de la commande %1$s</string>
+
+    <string name="status_new">En cours de vérification</string>
+    <string name="status_preparing">En préparation</string>
+    <string name="status_out_for_delivery">Sortie pour livraison</string>
+    <string name="status_delivered">Livrée</string>
+    <string name="status_cancelled">Annulée</string>
+
+    <string name="about_title">À propos</string>
+    <string name="contact_us">Contactez-nous</string>
+    <string name="working_hours">Horaires d’ouverture</string>
+    <string name="language">اللغة / Langue</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_fr">Français</string>
+    <string name="delivery_info">Livraison : %1$s — gratuite dès %2$s</string>
+    <string name="app_version">Version %1$s</string>
+    <string name="cash_on_delivery">Paiement à la livraison</string>
+</resources>
