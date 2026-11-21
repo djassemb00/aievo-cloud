@@ -64,8 +64,16 @@ fun AdminApp() {
     var sessionChecked by remember { mutableStateOf(false) }
     var showingSignUp by remember { mutableStateOf(false) }
     var showingEmployees by remember { mutableStateOf(false) }
+    // زر التسجيل الذاتي يظهر فقط إذا لم يكن هناك أي مسؤول بعد (أول responsible يسجل يصبح مالكاً)
+    var showSignUp by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
+        // تحقق مما إذا وجد أي مسؤول في النظام لإظهار/إخفاء زر إنشاء حساب جديد
+        showSignUp = try {
+            !client.anyAdminExists()
+        } catch (e: Exception) {
+            true
+        }
         if (client.signedIn()) {
             signedIn = client.ensureFreshToken()
             // أول مستخدم registrado يصبح مالكاً تلقائياً
@@ -91,6 +99,7 @@ fun AdminApp() {
                 client = client,
                 onSignedIn = { signedIn = true },
                 onSignUp = { showingSignUp = true },
+                showSignUp = showSignUp,
             )
         }
         return

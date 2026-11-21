@@ -191,6 +191,8 @@ fun SignUpScreen(
                 scope.launch {
                     try {
                         client.signUp(email, password)
+                        // أول مسؤول يسجل يصبح مالكاً تلقائياً
+                        client.ensureOwnerIfFirst()
                         onSignedIn()
                     } catch (e: Exception) {
                         error = "signUpError"

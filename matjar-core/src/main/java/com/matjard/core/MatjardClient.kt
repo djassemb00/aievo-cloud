@@ -232,6 +232,13 @@ class MatjardClient(context: Context) {
         }
     }
 
+    /** يتحقق مما إذا وجد أي مسؤول مسجل في جدول admin_users (لإظهار/إخفاء زر التسجيل الذاتي). */
+    suspend fun anyAdminExists(): Boolean = try {
+        api.rest.listAdminUsers(select = "id").isNotEmpty()
+    } catch (e: Exception) {
+        false
+    }
+
     /** رتبة المستخدم الحالي (يُجلب من admin_users). */
     suspend fun currentUserRole(): String? {
         return try {

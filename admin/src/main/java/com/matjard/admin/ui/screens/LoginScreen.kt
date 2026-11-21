@@ -63,6 +63,7 @@ fun LoginScreen(
     client: MatjardClient,
     onSignedIn: () -> Unit,
     onSignUp: () -> Unit,
+    showSignUp: Boolean = true,
 ) {
     val scope = rememberCoroutineScope()
     var email by remember { mutableStateOf("") }
@@ -153,6 +154,12 @@ fun LoginScreen(
                     scope.launch {
                         try {
                             client.signIn(email, password)
+                            // فقط المسؤول المسجل في admin_users مسموح له بالدخول
+                            if (!client.isAdmin()) {
+                                client.signOut()
+                                error = "notAdmin"
+                                return@launch
+                            }
                             client.sendLoginOTP(email)
                             otpSent = true
                             resendCountdown = 60
@@ -160,6 +167,7 @@ fun LoginScreen(
                         } catch (e: Exception) {
                             error = when (e.message) {
                                 "invalidCredentials" -> "invalidCredentials"
+                                "notAdmin" -> "notAdmin"
                                 else -> "loginError"
                             }
                         } finally {
@@ -357,7 +365,7 @@ fun LoginScreen(
         }
 
         Spacer(Modifier.height(24.dp))
-        if (stage == LoginStage.Password) {
+        if (showSignUp && stage == LoginStage.Password) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
