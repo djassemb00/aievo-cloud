@@ -31,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -73,7 +74,7 @@ fun LoginScreen(
     var otpSent by remember { mutableStateOf(false) }
     var resendEnabled by remember { mutableStateOf(true) }
     var resendCountdown by remember { mutableStateOf(60) }
-    var stage by remember { mutableStateOf(LoginStage.Password) }
+    var stage by remember { mutableStateOf<LoginStage>(LoginStage.Password) }
 
     Column(
         modifier = Modifier
