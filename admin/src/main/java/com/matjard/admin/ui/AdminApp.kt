@@ -153,7 +153,6 @@ fun AdminApp() {
         onOpenEmployees = { showingEmployees = true },
         onOpenNotifications = { showingNotifications = true },
     )
-    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

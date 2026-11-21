@@ -21,6 +21,8 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Chip
+import androidx.compose.material3.ChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -103,11 +105,12 @@ fun NotificationsScreen(
                 }
             }
             Spacer(Modifier.weight(1f))
-            TextButton(
-                onClick = { reloadKey++ },
-                icon = { Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(20.dp)) },
-            ) {
-                Text(stringResource(R.string.refresh))
+            TextButton(onClick = { reloadKey++ }) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(20.dp))
+                    Spacer(Modifier.width(4.dp))
+                    Text(stringResource(R.string.refresh))
+                }
             }
         }
 
@@ -179,7 +182,7 @@ private fun NotificationCard(
         colors = CardDefaults.cardColors(
             containerColor = if (notification.isRead) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.15f),
         ),
-        elevation = if (notification.isRead) 0.dp else 1.dp,
+        elevation = CardDefaults.cardElevation(if (notification.isRead) 0.dp else 1.dp),
         modifier = Modifier.fillMaxWidth(),
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
@@ -230,9 +233,9 @@ private fun ChipType(type: String, color: Long) {
         "success" -> stringResource(R.string.notify_success)
         else -> stringResource(R.string.notify_info)
     }
-    androidx.compose.material3.Chip(
+    Chip(
         onClick = {},
-        colors = androidx.compose.material3.ChipDefaults.chipColors(
+        colors = ChipDefaults.chipColors(
             containerColor = androidx.compose.ui.graphics.Color(color).copy(alpha = 0.15f),
         ),
         label = { Text(label, fontSize = 10.sp, fontWeight = FontWeight.Bold) },
