@@ -1,6 +1,7 @@
 package com.matjard.admin.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,7 +22,6 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Chip
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -233,11 +233,16 @@ private fun ChipType(type: String, color: Long) {
         "success" -> stringResource(R.string.notify_success)
         else -> stringResource(R.string.notify_info)
     }
-    Chip(
-        onClick = {},
-        colors = androidx.compose.material3.ChipDefaults.chipColors(
-            containerColor = androidx.compose.ui.graphics.Color(color).copy(alpha = 0.15f),
-        ),
-        label = { Text(label, fontSize = 10.sp, fontWeight = FontWeight.Bold) },
-    )
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 6.dp, vertical = 2.dp)
+            .background(androidx.compose.ui.graphics.Color(color).copy(alpha = 0.15f), RoundedCornerShape(6.dp)),
+    ) {
+        Text(
+            label,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold,
+            color = androidx.compose.ui.graphics.Color(color),
+        )
+    }
 }
