@@ -33,8 +33,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.Lifecycle.Event.ON_STOP
-import androidx.lifecycle.LocalLifecycleOwner
+import androidx.lifecycle.Event.ON_STOP
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.matjard.core.MatjardClient
 import com.matjard.core.Product
 import com.matjard.admin.R
@@ -90,10 +91,12 @@ fun AdminApp() {
     // تسجيل خروج تلقائي عند خروج التطبيق للخلفية دون تسجيل خروج يدوي
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner, client, signedIn) {
-        val observer = DefaultLifecycleObserver { _, event ->
-            if (event == ON_STOP && signedIn) {
-                client.signOut()
-                signedIn = false
+        val observer = object : DefaultLifecycleObserver {
+            override fun onStop(owner: LifecycleOwner) {
+                if (signedIn) {
+                    client.signOut()
+                    signedIn = false
+                }
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
