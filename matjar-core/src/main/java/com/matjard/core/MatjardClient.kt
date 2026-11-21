@@ -159,21 +159,58 @@ class MatjardClient(context: Context) {
 
     /** كل المسؤولين مع رتبهم (يراها كل مستخدم لنفسه فقط عبر RLS، لكن المالك يرى الكل إذا خُفّفت السياسة). */
     suspend fun listAdminUsers(): List<AdminUser> =
-        api.rest.listAdminUsers(select = "id, email, role")
+        api.rest.listAdminUsers(select = "id, email, full_name, phone, hire_date, salary, address, role")
 
-    /** ينشئ حساب موظف جديد في Supabase Auth ويضيفه إلى admin_users بالرتبة المحددة. */
-    suspend fun addAdminUser(email: String, password: String, role: String) {
+    /** ينشئ حساب موظف جديد مع معلومات شخصية كاملة. */
+    suspend fun addAdminUser(
+        email: String,
+        password: String,
+        role: String,
+        fullName: String? = null,
+        phone: String? = null,
+        hireDate: String? = null,
+        salary: Double? = null,
+        address: String? = null,
+    ) {
         val auth = try {
             api.gotrue.signUp(SignUpRequest(email.trim(), password))
         } catch (e: HttpException) {
             throw IOException(if (e.code() in 400..499) "signUpError" else "signUpError")
         }
         val userId = auth.user?.id ?: throw IOException("لم يتم استلام معرّف المستخدم من Supabase")
-        ensureOk(api.rest.createAdminUser(mapOf(
+        val fields = mutableMapOf<String, Any?>(
             "id" to userId,
             "email" to email,
-            "role" to role
-        )), "createAdminUser")
+            "role" to role,
+        )
+        fullName?.let { fields["full_name"] = it }
+        phone?.let { fields["phone"] = it }
+        hireDate?.let { fields["hire_date"] = it }
+        salary?.let { fields["salary"] = it }
+        address?.let { fields["address"] = it }
+        ensureOk(api.rest.createAdminUser(fields), "createAdminUser")
+    }
+
+    /** يُحدّث معلومات موظف (الرتبة والمعلومات الشخصية). */
+    suspend fun updateAdminUserProfile(
+        userId: String,
+        role: String?,
+        fullName: String?,
+        phone: String?,
+        hireDate: String?,
+        salary: Double?,
+        address: String?,
+    ) {
+        val fields = mutableMapOf<String, Any?>()
+        role?.let { fields["role"] = it }
+        fullName?.let { fields["full_name"] = it }
+        phone?.let { fields["phone"] = it }
+        hireDate?.let { fields["hire_date"] = it }
+        salary?.let { fields["salary"] = it }
+        address?.let { fields["address"] = it }
+        if (fields.isNotEmpty()) {
+            ensureOk(api.rest.updateAdminUserRole("eq.$userId", fields), "updateAdminUserProfile")
+        }
     }
 
     /** يُحدّث رتبة مسؤول. */
