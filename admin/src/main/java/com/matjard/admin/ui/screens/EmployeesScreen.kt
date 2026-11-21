@@ -16,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.People
@@ -59,10 +60,25 @@ fun EmployeesScreen(
 
     // Add worker form state
     var showAddForm by remember { mutableStateOf(false) }
+    var newFullName by remember { mutableStateOf("") }
     var newEmail by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
+    var newPhone by remember { mutableStateOf("") }
+    var newHireDate by remember { mutableStateOf("") }
+    var newSalary by remember { mutableStateOf("") }
+    var newAddress by remember { mutableStateOf("") }
     var newRole by remember { mutableStateOf<String?>(null) }
     var addingBusy by remember { mutableStateOf(false) }
+
+    // Edit worker dialog state
+    var editUser by remember { mutableStateOf<AdminUser?>(null) }
+    var editFullName by remember { mutableStateOf("") }
+    var editPhone by remember { mutableStateOf("") }
+    var editHireDate by remember { mutableStateOf("") }
+    var editSalary by remember { mutableStateOf("") }
+    var editAddress by remember { mutableStateOf("") }
+    var editRole by remember { mutableStateOf<String?>(null) }
+    var editingBusy by remember { mutableStateOf(false) }
 
     val roles = listOf("owner", "manager", "staff")
 
@@ -161,48 +177,74 @@ fun EmployeesScreen(
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
-                                    user.email ?: stringResource(R.string.unknown_email),
+                                    user.fullName ?: user.email ?: stringResource(R.string.unknown_email),
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Medium,
                                 )
                                 Text(
-                                    "معرف: ${user.id.take(8)}...",
+                                    user.email ?: stringResource(R.string.unknown_email),
                                     fontSize = 11.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
+                                if (user.phone != null) {
+                                    Text(
+                                        "📱 ${user.phone}",
+                                        fontSize = 11.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
                             }
                             ChipRole(role = user.role)
                             Spacer(Modifier.width(8.dp))
-                            // Role quick-change buttons
-                            Row(
-                                modifier = Modifier.align(Alignment.CenterVertically),
+                            FilledTonalIconButton(
+                                onClick = {
+                                    editUser = user
+                                    editFullName = user.fullName ?: ""
+                                    editPhone = user.phone ?: ""
+                                    editHireDate = user.hireDate ?: ""
+                                    editSalary = user.salary?.toString() ?: ""
+                                    editAddress = user.address ?: ""
+                                    editRole = user.role
+                                },
                             ) {
-                                roles.forEach { role ->
-                                    val isCurrent = user.role == role
-                                    Button(
-                                        onClick = {
-                                            scope.launch {
-                                                try {
-                                                    busy = true
-                                                    client.updateAdminUserRole(user.id, role)
-                                                    loadUsers()
-                                                } catch (e: Exception) {
-                                                    error = "تعذر تحديث الرتبة"
-                                                } finally {
-                                                    busy = false
-                                                }
+                                Icon(Icons.Filled.Edit, contentDescription = null)
+                            }
+                        }
+                        Spacer(Modifier.height(8.dp))
+                        // Role quick-change buttons
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            roles.forEach { role ->
+                                val isCurrent = user.role == role
+                                Button(
+                                    onClick = {
+                                        scope.launch {
+                                            try {
+                                                busy = true
+                                                client.updateAdminUserProfile(
+                                                    user.id,
+                                                    role,
+                                                    null, null, null, null, null,
+                                                )
+                                                loadUsers()
+                                            } catch (e: Exception) {
+                                                error = "تعذر تحديث الرتبة"
+                                            } finally {
+                                                busy = false
                                             }
-                                        },
-                                        enabled = !busy && !isCurrent,
-                                        shape = RoundedCornerShape(8.dp),
-                                        modifier = Modifier.width(70.dp),
-                                    ) {
-                                        Text(
-                                            text = if (isCurrent) "✓ ${role.uppercase()}" else role.uppercase(),
-                                            fontSize = 10.sp,
-                                            fontWeight = FontWeight.Bold,
-                                        )
-                                    }
+                                        }
+                                    },
+                                    enabled = !busy && !isCurrent,
+                                    shape = RoundedCornerShape(8.dp),
+                                    modifier = Modifier.width(70.dp),
+                                ) {
+                                    Text(
+                                        text = if (isCurrent) "✓ ${role.uppercase()}" else role.uppercase(),
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold,
+                                    )
                                 }
                             }
                         }
@@ -264,6 +306,17 @@ fun EmployeesScreen(
                     Spacer(Modifier.height(12.dp))
 
                     OutlinedTextField(
+                        value = newFullName,
+                        onValueChange = { newFullName = it },
+                        label = { Text(stringResource(R.string.full_name)) },
+                        leadingIcon = { Icon(Icons.Filled.People, contentDescription = null) },
+                        singleLine = true,
+                        enabled = !addingBusy,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
                         value = newEmail,
                         onValueChange = { newEmail = it },
                         label = { Text(stringResource(R.string.email)) },
@@ -280,6 +333,49 @@ fun EmployeesScreen(
                         onValueChange = { newPassword = it },
                         label = { Text(stringResource(R.string.password)) },
                         leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) },
+                        singleLine = true,
+                        enabled = !addingBusy,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = newPhone,
+                        onValueChange = { newPhone = it },
+                        label = { Text(stringResource(R.string.phone)) },
+                        leadingIcon = { Icon(Icons.Filled.Phone, contentDescription = null) },
+                        singleLine = true,
+                        enabled = !addingBusy,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = newHireDate,
+                        onValueChange = { newHireDate = it },
+                        label = { Text(stringResource(R.string.hire_date)) },
+                        singleLine = true,
+                        enabled = !addingBusy,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = newSalary,
+                        onValueChange = { newSalary = it },
+                        label = { Text(stringResource(R.string.salary)) },
+                        singleLine = true,
+                        enabled = !addingBusy,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp),
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = newAddress,
+                        onValueChange = { newAddress = it },
+                        label = { Text(stringResource(R.string.address)) },
                         singleLine = true,
                         enabled = !addingBusy,
                         modifier = Modifier.fillMaxWidth(),
@@ -324,17 +420,31 @@ fun EmployeesScreen(
                         Spacer(Modifier.width(8.dp))
                         Button(
                             onClick = {
-                                if (newEmail.isBlank() || newPassword.isBlank() || newRole == null) {
-                                    error = "يرجى تعبئة جميع الحقول"
+                                if (newFullName.isBlank() || newEmail.isBlank() || newPassword.isBlank() || newRole == null) {
+                                    error = "يرجى تعبئة جميع الحقول المطلوبة"
                                     return@Button
                                 }
                                 addingBusy = true
                                 scope.launch {
                                     try {
-                                        client.addAdminUser(newEmail, newPassword, newRole!!)
+                                        client.addAdminUser(
+                                            email = newEmail,
+                                            password = newPassword,
+                                            role = newRole!!,
+                                            fullName = newFullName.takeIf { it.isNotEmpty() },
+                                            phone = newPhone.takeIf { it.isNotEmpty() },
+                                            hireDate = newHireDate.takeIf { it.isNotEmpty() },
+                                            salary = newSalary.toDoubleOrNull(),
+                                            address = newAddress.takeIf { it.isNotEmpty() },
+                                        )
                                         error = null
+                                        newFullName = ""
                                         newEmail = ""
                                         newPassword = ""
+                                        newPhone = ""
+                                        newHireDate = ""
+                                        newSalary = ""
+                                        newAddress = ""
                                         newRole = null
                                         showAddForm = false
                                         loadUsers()
