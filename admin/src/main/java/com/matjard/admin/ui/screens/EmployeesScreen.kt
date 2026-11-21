@@ -343,7 +343,6 @@ fun EmployeesScreen(
                         value = newPhone,
                         onValueChange = { newPhone = it },
                         label = { Text(stringResource(R.string.phone)) },
-                        leadingIcon = { Icon(Icons.Filled.Phone, contentDescription = null) },
                         singleLine = true,
                         enabled = !addingBusy,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),

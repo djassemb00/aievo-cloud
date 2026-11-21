@@ -157,6 +157,6 @@
     <string name="unknown_email">Email inconnu</string>
     <string name="close">Fermer</string>
     <string name="full_name">Nom complet</string>
-    <string name="hire_date">Date d'embauche</string>
+    <string name="hire_date">Date d embauche</string>
     <string name="salary">Salaire (DA)</string>
 </resources>
