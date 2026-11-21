@@ -197,7 +197,6 @@ fun LoginScreen(
                 singleLine = true,
                 enabled = !busy,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                maxLength = 6,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(14.dp),
             )
