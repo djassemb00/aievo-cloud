@@ -14,10 +14,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -25,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -83,7 +85,10 @@ fun NotificationsScreen(
                 modifier = Modifier.size(24.dp),
             )
             Spacer(Modifier.width(8.dp))
-            Column {
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
                 Text(
                     stringResource(R.string.notifications_title),
                     fontWeight = FontWeight.ExtraBold,
@@ -113,7 +118,7 @@ fun NotificationsScreen(
                 Column(
                     modifier = Modifier.fillMaxSize().padding(40.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalAlignment = Alignment.CenterVertically,
+                    verticalArrangement = Arrangement.Center,
                 ) {
                     Icon(Icons.Filled.Info, contentDescription = null, modifier = Modifier.size(64.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     Spacer(Modifier.height(16.dp))
@@ -135,11 +140,6 @@ fun NotificationsScreen(
                                 } catch (e: Exception) {
                                     // فشل تحديد المقروء ليس خطأً حرجة
                                 }
-                            }
-                        },
-                        onDelete = {
-                            scope.launch {
-                                // الحذف يتم عبر API إذا لزم الأمر — حالياً نحدد كمقروء فقط
                             }
                         },
                     )
@@ -166,7 +166,6 @@ fun NotificationsScreen(
 private fun NotificationCard(
     notification: AdminNotification,
     onMarkRead: () -> Unit,
-    onDelete: () -> Unit,
 ) {
     val color = when (notification.type) {
         "warning" -> 0xFFF59E0B
