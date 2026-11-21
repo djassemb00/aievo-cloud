@@ -276,11 +276,7 @@ class MatjardClient(context: Context) {
     /** يرسل إشعاراً للمسؤول (يُخزّن في جدول الإشعارات). */
     suspend fun sendAdminNotification(title: String, message: String, type: String = "info") {
         try {
-            val resp = api.rest.createAdminNotification(mapOf(
-                "p_title" to title,
-                "p_message" to message,
-                "p_type" to type,
-            ))
+            val resp = api.rest.createAdminNotification(CreateAdminNotificationRequest(title, message, type))
             if (!resp.isSuccessful) throw IOException("فشل إرسال الإشعار")
         } catch (e: Exception) {
             // الإشعارات غير ضرورية لسير العمل الأساسي
@@ -318,7 +314,7 @@ class MatjardClient(context: Context) {
             .build()
         val client = okhttp3.OkHttpClient()
         val response = client.newCall(request).execute()
-        val responseBody = response.body()?.string() ?: ""
+        val responseBody = response.body?.string() ?: ""
         response.close()
         if (!response.isSuccessful) throw IOException("HTTP ${response.code}: $responseBody")
         return try {
