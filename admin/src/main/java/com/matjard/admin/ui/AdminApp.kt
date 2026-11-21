@@ -64,13 +64,10 @@ fun AdminApp() {
     var sessionChecked by remember { mutableStateOf(false) }
     var showingSignUp by remember { mutableStateOf(false) }
     var showingEmployees by remember { mutableStateOf(false) }
-    var userRole by remember { mutableStateOf<String?>(null) }
 
     LaunchedEffect(Unit) {
         if (client.signedIn()) {
             signedIn = client.ensureFreshToken()
-            val role = client.ensureOwnerIfFirst()
-            userRole = role
         }
         sessionChecked = true
     }
@@ -107,7 +104,6 @@ fun AdminApp() {
 
     AdminScaffold(
         client = client,
-        userRole = userRole ?: "staff",
         onSignOut = { client.signOut(); signedIn = false },
         onOpenEmployees = { showingEmployees = true },
     )
@@ -117,14 +113,10 @@ fun AdminApp() {
 @Composable
 private fun AdminScaffold(
     client: MatjardClient,
-    userRole: String,
     onSignOut: () -> Unit,
     onOpenEmployees: () -> Unit,
 ) {
     val lang = client.language.lang()
-
-    val isOwner = userRole == "owner"
-    val isManager = userRole == "manager" || isOwner
 
     var tab by remember { mutableStateOf(Tab.Dashboard) }
     var overlay by remember { mutableStateOf<Overlay?>(null) }
@@ -139,29 +131,24 @@ private fun AdminScaffold(
             return
         }
         Overlay.Banners -> {
-            if (isManager) {
-                BannersScreen(client = client, lang = lang, onClose = { closeOverlay() })
-            }
+            BannersScreen(client = client, lang = lang, onClose = { closeOverlay() })
             return
         }
         Overlay.Settings -> {
-            if (isManager) {
-                SettingsScreen(client = client, onClose = { closeOverlay() })
-            }
+            SettingsScreen(client = client, onClose = { closeOverlay() })
             return
         }
         null -> Unit
     }
 
-    // Build visible tabs based on role
-    val visibleTabs = mutableListOf<Tab>()
-    visibleTabs.add(Tab.Dashboard)
-    if (isManager) {
-        visibleTabs.add(Tab.Orders)
-        visibleTabs.add(Tab.Products)
-        visibleTabs.add(Tab.Categories)
-    }
-    visibleTabs.add(Tab.More)
+    // All tabs visible to every logged-in user (simple experience for seller)
+    val items = listOf(
+        Tab.Dashboard to (Icons.Filled.Dashboard to R.string.tab_dashboard),
+        Tab.Orders to (Icons.Filled.ReceiptLong to R.string.tab_orders),
+        Tab.Products to (Icons.Filled.Inventory2 to R.string.tab_products),
+        Tab.Categories to (Icons.Filled.Category to R.string.tab_categories),
+        Tab.More to (Icons.Filled.MoreHoriz to R.string.tab_more),
+    )
 
     Scaffold(
         topBar = {
@@ -176,24 +163,16 @@ private fun AdminScaffold(
                     IconButton(onClick = onSignOut) {
                         Icon(Icons.Filled.Logout, contentDescription = stringResource(R.string.sign_out))
                     }
-                    if (isOwner) {
-                        IconButton(onClick = onOpenEmployees) {
-                            Icon(Icons.Filled.People, contentDescription = stringResource(R.string.employees_title))
-                        }
+                    IconButton(onClick = onOpenEmployees) {
+                        Icon(Icons.Filled.People, contentDescription = stringResource(R.string.employees_title))
                     }
                 },
             )
         },
         bottomBar = {
             NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
-                visibleTabs.forEach { entry ->
-                    val (icon, labelRes) = when (entry) {
-                        Tab.Dashboard -> Icons.Filled.Dashboard to R.string.tab_dashboard
-                        Tab.Orders -> Icons.Filled.ReceiptLong to R.string.tab_orders
-                        Tab.Products -> Icons.Filled.Inventory2 to R.string.tab_products
-                        Tab.Categories -> Icons.Filled.Category to R.string.tab_categories
-                        Tab.More -> Icons.Filled.MoreHoriz to R.string.tab_more
-                    }
+                items.forEach { (entry, pair) ->
+                    val (icon, labelRes) = pair
                     NavigationBarItem(
                         selected = tab == entry,
                         onClick = { tab = entry },
@@ -210,20 +189,20 @@ private fun AdminScaffold(
                     client = client,
                     onViewAllOrders = { tab = Tab.Orders },
                 )
-                Tab.Orders -> if (isManager) OrdersScreen(client = client)
-                Tab.Products -> if (isManager) ProductsScreen(
+                Tab.Orders -> OrdersScreen(client = client)
+                Tab.Products -> ProductsScreen(
                     client = client,
                     lang = lang,
                     onAdd = { overlay = Overlay.ProductEdit(null) },
                     onEdit = { overlay = Overlay.ProductEdit(it) },
                 )
-                Tab.Categories -> if (isManager) CategoriesScreen(client = client, lang = lang)
+                Tab.Categories -> CategoriesScreen(client = client, lang = lang)
                 Tab.More -> MoreScreen(
                     client = client,
                     lang = lang,
                     onOpenSettings = { overlay = Overlay.Settings },
                     onOpenBanners = { overlay = Overlay.Banners },
-                    isManager = isManager,
+                    isManager = true,
                 )
             }
         }
