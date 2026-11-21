@@ -1,5 +1,6 @@
 package com.matjard.core
 
+import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Response

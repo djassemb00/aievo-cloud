@@ -170,18 +170,19 @@ class MatjardClient(context: Context) {
         ensureOk(api.rest.deleteAdminUser("eq.$userId"), "deleteAdminUser")
 
     /** إذا كان جدول admin_users فارغاً، يصنع المستخدم الحالي مالكاً (owner) ويعيد رتبته. */
-    suspend fun ensureOwnerIfFirst(): String =
-        try {
+    suspend fun ensureOwnerIfFirst(): String {
+        return try {
             val resp = api.rest.setOwnerIfFirst(RoleRequest("owner"))
             if (!resp.isSuccessful) throw IOException(errorMessage(resp))
             resp.body()?.role ?: "staff"
         } catch (e: Exception) {
             "staff"
         }
+    }
 
     /** رتبة المستخدم الحالي (يُجلب من admin_users). */
-    suspend fun currentUserRole(): String? =
-        try {
+    suspend fun currentUserRole(): String? {
+        return try {
             val me = tokens.accessToken ?: return null
             // Decode JWT payload to get user id, then look up role
             val parts = me.split(".")
@@ -195,6 +196,7 @@ class MatjardClient(context: Context) {
         } catch (e: Exception) {
             null
         }
+    }
 
     // ------------------------------------------------------------------
     // Admin catalog writes
