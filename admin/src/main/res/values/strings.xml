@@ -73,6 +73,7 @@
     <string name="edit_product">تعديل المنتج</string>
     <string name="new_product">منتج جديد</string>
     <string name="search_products">ابحث عن منتج…</string>
+    <string name="uncategorized">غير مصنف</string>
     <string name="name_ar">الاسم بالعربية *</string>
     <string name="name_fr">الاسم بالفرنسية *</string>
     <string name="description_ar">الوصف بالعربية</string>

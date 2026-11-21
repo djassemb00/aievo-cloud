@@ -68,6 +68,7 @@
     <string name="edit_product">Modifier le produit</string>
     <string name="new_product">Nouveau produit</string>
     <string name="search_products">Rechercher un produit…</string>
+    <string name="uncategorized">Non classe</string>
     <string name="name_ar">Nom en arabe *</string>
     <string name="name_fr">Nom en français *</string>
     <string name="description_ar">Description en arabe</string>

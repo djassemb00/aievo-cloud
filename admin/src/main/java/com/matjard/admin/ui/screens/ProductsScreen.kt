@@ -20,8 +20,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -50,6 +48,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.SubcomposeAsyncImage
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.matjard.core.Category
 import com.matjard.core.MatjardClient
 import com.matjard.core.Product
 import com.matjard.core.formatPrice
@@ -57,6 +56,7 @@ import com.matjard.admin.R
 import com.matjard.admin.ui.ConfirmDialog
 import com.matjard.admin.ui.ErrorRetry
 import com.matjard.admin.ui.LoadingBox
+import com.matjard.admin.ui.categoryEmoji
 import androidx.compose.ui.layout.ContentScale
 
 @Composable
@@ -68,16 +68,28 @@ fun ProductsScreen(
 ) {
     val scope = rememberCoroutineScope()
     var query by remember { mutableStateOf("") }
+    var categories by remember { mutableStateOf<List<Category>>(emptyList()) }
     var products by remember { mutableStateOf<List<Product>>(emptyList()) }
     var loading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
     var reloadKey by remember { mutableIntStateOf(0) }
     var deleteTarget by remember { mutableStateOf<Product?>(null) }
 
+    // منتجات غير مصنفة (بدون تصنيف أو تصنيف غير موجود)
+    val uncategorizedProducts: List<Product> = products.filter { p ->
+        categories.none { it.id == p.categoryId }
+    }
+
+    // المنتجات المصنفة، مجمّعة حسب التصنيف
+    val categorized: Map<Category, List<Product>> = categories.associateWith { cat ->
+        products.filter { it.categoryId == cat.id }
+    }
+
     suspend fun reload() {
         loading = true
         error = null
         try {
+            categories = client.categories(includeInactive = true)
             products = client.products(search = query.trim().ifBlank { null }, includeInactive = true)
         } catch (e: Exception) {
             error = e.message
@@ -115,26 +127,64 @@ fun ProductsScreen(
                     contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp),
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
-                    items(products, key = { it.id }) { product ->
-                        ProductRow(
-                            product = product,
-                            lang = lang,
-                            onEdit = { onEdit(product) },
-                            onToggleFeatured = {
-                                scope.launch {
-                                    runCatching { client.updateProduct(product.id, mapOf("is_featured" to !product.isFeatured)) }
-                                    reloadKey++
-                                }
-                            },
-                            onToggleActive = {
-                                scope.launch {
-                                    runCatching { client.updateProduct(product.id, mapOf("is_active" to !product.isActive)) }
-                                    reloadKey++
-                                }
-                            },
-                            onDelete = { deleteTarget = product },
-                        )
+                    // --- قسم المنتجات غير المصنفة ---
+                    if (uncategorizedProducts.isNotEmpty()) {
+                        item {
+                            SectionHeader(title = stringResource(R.string.uncategorized), icon = "📦")
+                        }
+                        items(uncategorizedProducts, key = { it.id }) { product ->
+                            ProductRow(
+                                product = product,
+                                lang = lang,
+                                categoryName = stringResource(R.string.uncategorized),
+                                onEdit = { onEdit(product) },
+                                onToggleFeatured = {
+                                    scope.launch {
+                                        runCatching { client.updateProduct(product.id, mapOf("is_featured" to !product.isFeatured)) }
+                                        reloadKey++
+                                    }
+                                },
+                                onToggleActive = {
+                                    scope.launch {
+                                        runCatching { client.updateProduct(product.id, mapOf("is_active" to !product.isActive)) }
+                                        reloadKey++
+                                    }
+                                },
+                                onDelete = { deleteTarget = product },
+                            )
+                        }
                     }
+
+                    // --- كل تصنيف مع منتجاته ---
+                    categorized.entries.forEach { (cat, catProducts) ->
+                        if (catProducts.isEmpty()) return@forEach
+
+                        item {
+                            SectionHeader(title = cat.name(lang), icon = categoryEmoji(cat.icon))
+                        }
+                        items(catProducts, key = { it.id }) { product ->
+                            ProductRow(
+                                product = product,
+                                lang = lang,
+                                categoryName = cat.name(lang),
+                                onEdit = { onEdit(product) },
+                                onToggleFeatured = {
+                                    scope.launch {
+                                        runCatching { client.updateProduct(product.id, mapOf("is_featured" to !product.isFeatured)) }
+                                        reloadKey++
+                                    }
+                                },
+                                onToggleActive = {
+                                    scope.launch {
+                                        runCatching { client.updateProduct(product.id, mapOf("is_active" to !product.isActive)) }
+                                        reloadKey++
+                                    }
+                                },
+                                onDelete = { deleteTarget = product },
+                            )
+                        }
+                    }
+
                     item { Spacer(Modifier.height(88.dp)) }
                 }
             }
@@ -168,10 +218,29 @@ fun ProductsScreen(
     }
 }
 
+/** رأس قسم يحتوي على اسم التصنيف ورمز تعبيري. */
+@Composable
+private fun SectionHeader(title: String, icon: String) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp, horizontal = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(icon, fontSize = 18.sp)
+        Spacer(Modifier.width(8.dp))
+        Text(
+            title,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            color = MaterialTheme.colorScheme.primary,
+        )
+    }
+}
+
 @Composable
 private fun ProductRow(
     product: Product,
     lang: String,
+    categoryName: String,
     onEdit: () -> Unit,
     onToggleFeatured: () -> Unit,
     onToggleActive: () -> Unit,
@@ -216,6 +285,11 @@ private fun ProductRow(
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
                     fontSize = 14.sp,
+                )
+                Text(
+                    categoryName,
+                    fontSize = 11.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Text(
                     formatPrice(product.price),
