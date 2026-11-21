@@ -116,6 +116,12 @@ interface PostgrestApi {
     @GET("rest/v1/admin_users")
     suspend fun listAdminUsers(@Query("select") select: String = "*"): List<AdminUser>
 
+    @POST("rest/v1/admin_users")
+    suspend fun createAdminUser(
+        @Body fields: Map<String, @JvmSuppressWildcards Any?>,
+        @Header("Prefer") prefer: String = "return=representation",
+    ): Response<ResponseBody>
+
     @PATCH("rest/v1/admin_users")
     suspend fun updateAdminUserRole(
         @Query("id") idFilter: String,

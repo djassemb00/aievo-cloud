@@ -68,6 +68,8 @@ fun AdminApp() {
     LaunchedEffect(Unit) {
         if (client.signedIn()) {
             signedIn = client.ensureFreshToken()
+            // أول مستخدم registrado يصبح مالكاً تلقائياً
+            client.ensureOwnerIfFirst()
         }
         sessionChecked = true
     }

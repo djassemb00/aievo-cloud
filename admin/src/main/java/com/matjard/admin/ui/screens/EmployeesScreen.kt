@@ -57,19 +57,12 @@ fun EmployeesScreen(
     var error by remember { mutableStateOf<String?>(null) }
     var refreshing by remember { mutableStateOf(false) }
 
-    // Add employee form state
+    // Add worker form state
     var showAddForm by remember { mutableStateOf(false) }
     var newEmail by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
     var newRole by remember { mutableStateOf<String?>(null) }
-    var addDropdownOpen by remember { mutableStateOf(false) }
     var addingBusy by remember { mutableStateOf(false) }
-
-    // Edit role dialog state
-    var editUserId by remember { mutableStateOf<String?>(null) }
-    var editUserEmail by remember { mutableStateOf("") }
-    var editRole by remember { mutableStateOf<String?>(null) }
-    var editDropdownOpen by remember { mutableStateOf(false) }
 
     val roles = listOf("owner", "manager", "staff")
 
@@ -173,64 +166,43 @@ fun EmployeesScreen(
                                     fontWeight = FontWeight.Medium,
                                 )
                                 Text(
-                                    user.id,
+                                    "معرف: ${user.id.take(8)}...",
                                     fontSize = 11.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
                             ChipRole(role = user.role)
                             Spacer(Modifier.width(8.dp))
-                            if (editUserId == user.id) {
-                                Column(
-                                    modifier = Modifier.align(Alignment.CenterVertically),
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.select_role),
-                                        fontSize = 12.sp,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                        modifier = Modifier.padding(bottom = 4.dp),
-                                    )
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                    ) {
-                                        roles.forEach { role ->
-                                            Button(
-                                                onClick = {
-                                                    scope.launch {
-                                                        try {
-                                                            busy = true
-                                                            client.updateAdminUserRole(user.id, role)
-                                                            loadUsers()
-                                                            editUserId = null
-                                                        } catch (e: Exception) {
-                                                            error = "تعذر تحديث الرتبة"
-                                                        } finally {
-                                                            busy = false
-                                                        }
-                                                    }
-                                                },
-                                                enabled = !busy,
-                                                shape = RoundedCornerShape(8.dp),
-                                                modifier = Modifier.width(80.dp),
-                                            ) {
-                                                Text(
-                                                    text = role.uppercase(),
-                                                    fontSize = 10.sp,
-                                                    fontWeight = FontWeight.Bold,
-                                                )
+                            // Role quick-change buttons
+                            Row(
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                            ) {
+                                roles.forEach { role ->
+                                    val isCurrent = user.role == role
+                                    Button(
+                                        onClick = {
+                                            scope.launch {
+                                                try {
+                                                    busy = true
+                                                    client.updateAdminUserRole(user.id, role)
+                                                    loadUsers()
+                                                } catch (e: Exception) {
+                                                    error = "تعذر تحديث الرتبة"
+                                                } finally {
+                                                    busy = false
+                                                }
                                             }
-                                        }
+                                        },
+                                        enabled = !busy && !isCurrent,
+                                        shape = RoundedCornerShape(8.dp),
+                                        modifier = Modifier.width(70.dp),
+                                    ) {
+                                        Text(
+                                            text = if (isCurrent) "✓ ${role.uppercase()}" else role.uppercase(),
+                                            fontSize = 10.sp,
+                                            fontWeight = FontWeight.Bold,
+                                        )
                                     }
-                                }
-                            } else {
-                                FilledTonalIconButton(
-                                    onClick = {
-                                        editUserId = if (editUserId == user.id) null else user.id
-                                        editRole = user.role
-                                    },
-                                ) {
-                                    Icon(Icons.Filled.Delete, contentDescription = null)
                                 }
                             }
                         }
@@ -273,7 +245,7 @@ fun EmployeesScreen(
 
         Spacer(Modifier.height(24.dp))
 
-        // Add employee form
+        // Add worker form — full control by owner
         if (showAddForm) {
             Surface(
                 shape = RoundedCornerShape(12.dp),
@@ -329,10 +301,10 @@ fun EmployeesScreen(
                                 onClick = { newRole = role },
                                 enabled = !addingBusy,
                                 shape = RoundedCornerShape(8.dp),
-                                modifier = Modifier.width(80.dp),
+                                modifier = Modifier.width(70.dp),
                             ) {
                                 Text(
-                                    text = if (newRole == role) "✓ " + role.uppercase() else role.uppercase(),
+                                    text = if (newRole == role) "✓ ${role.uppercase()}" else role.uppercase(),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                 )
@@ -359,15 +331,15 @@ fun EmployeesScreen(
                                 addingBusy = true
                                 scope.launch {
                                     try {
-                                        client.signUp(newEmail, newPassword)
-                                        error = "تم إنشاء الحساب.请 من الموظف تسجيل الدخول مرة واحدة، ثم عيّن رتبته من هنا."
+                                        client.addAdminUser(newEmail, newPassword, newRole!!)
+                                        error = null
                                         newEmail = ""
                                         newPassword = ""
                                         newRole = null
                                         showAddForm = false
                                         loadUsers()
                                     } catch (e: Exception) {
-                                        error = "تعذر إنشاء الحساب: ${e.message}"
+                                        error = "تعذر إضافة الموظف: ${e.message}"
                                     } finally {
                                         addingBusy = false
                                     }

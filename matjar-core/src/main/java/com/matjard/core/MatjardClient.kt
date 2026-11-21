@@ -161,6 +161,21 @@ class MatjardClient(context: Context) {
     suspend fun listAdminUsers(): List<AdminUser> =
         api.rest.listAdminUsers(select = "id, email, role")
 
+    /** ينشئ حساب موظف جديد في Supabase Auth ويضيفه إلى admin_users بالرتبة المحددة. */
+    suspend fun addAdminUser(email: String, password: String, role: String) {
+        val auth = try {
+            api.gotrue.signUp(SignUpRequest(email.trim(), password))
+        } catch (e: HttpException) {
+            throw IOException(if (e.code() in 400..499) "signUpError" else "signUpError")
+        }
+        val userId = auth.user?.id ?: throw IOException("لم يتم استلام معرّف المستخدم من Supabase")
+        ensureOk(api.rest.createAdminUser(mapOf(
+            "id" to userId,
+            "email" to email,
+            "role" to role
+        )), "createAdminUser")
+    }
+
     /** يُحدّث رتبة مسؤول. */
     suspend fun updateAdminUserRole(userId: String, role: String) =
         ensureOk(api.rest.updateAdminUserRole("eq.$userId", mapOf("role" to role)), "updateAdminUserRole")
