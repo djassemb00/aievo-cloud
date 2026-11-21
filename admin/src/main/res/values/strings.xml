@@ -169,4 +169,18 @@
     <string name="full_name">الاسم الكامل</string>
     <string name="hire_date">تاريخ التوظيف</string>
     <string name="salary">الراتب (د.ج)</string>
+
+    <!-- OTP Authentication (Two-Factor) -->
+    <string name="verify_title">التحقق المزدوج</string>
+    <string name="verify_subtitle_for">أدخل رمز التحقق المرسل إلى %1$s</string>
+    <string name="send_code_to_email">إرسال رمز إلى البريد الإلكتروني</string>
+    <string name="sending_code">جاري الإرسال…</string>
+    <string name="resend_code">إعادة الإرسال</string>
+    <string name="create_new_account">إنشاء حساب جديد</string>
+    <string name="enter_code_sent_to">أدخل الرمز المرسل إلى %1$s</string>
+    <string name="otp_code">رمز التحقق (6 أرقام)</string>
+    <string name="verify_code">تحقق من الرمز</string>
+    <string name="verifying">جاري التحقق…</string>
+    <string name="change_email">تغيير البريد الإلكتروني</string>
+    <string name="code_sent_info">تم إرسال رمز التحقق إلى بريدك. ينتهي صلاحية الرمز بعد دقيقة واحدة.</string>
 </resources>
