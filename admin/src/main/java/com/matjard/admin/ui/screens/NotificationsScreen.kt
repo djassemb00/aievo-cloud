@@ -22,7 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Chip
-import androidx.compose.material3.ChipDefaults
+
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -235,7 +235,7 @@ private fun ChipType(type: String, color: Long) {
     }
     Chip(
         onClick = {},
-        colors = ChipDefaults.chipColors(
+        colors = androidx.compose.material3.ChipDefaults.chipColors(
             containerColor = androidx.compose.ui.graphics.Color(color).copy(alpha = 0.15f),
         ),
         label = { Text(label, fontSize = 10.sp, fontWeight = FontWeight.Bold) },
