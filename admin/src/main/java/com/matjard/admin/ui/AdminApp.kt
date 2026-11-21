@@ -43,6 +43,7 @@ import com.matjard.admin.ui.screens.BannersScreen
 import com.matjard.admin.ui.screens.CategoriesScreen
 import com.matjard.admin.ui.screens.DashboardScreen
 import com.matjard.admin.ui.screens.LoginScreen
+import com.matjard.admin.ui.screens.CustomersScreen
 import com.matjard.admin.ui.screens.MoreScreen
 import com.matjard.admin.ui.screens.NotificationsScreen
 import com.matjard.admin.ui.screens.OrdersScreen
@@ -59,6 +60,7 @@ private sealed interface Overlay {
     data object Banners : Overlay
     data object Settings : Overlay
     data object Notifications : Overlay
+    data object Customers : Overlay
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,6 +74,7 @@ fun AdminApp() {
     var showingSignUp by remember { mutableStateOf(false) }
     var showingEmployees by remember { mutableStateOf(false) }
     var showingNotifications by remember { mutableStateOf(false) }
+    var showingCustomers by remember { mutableStateOf(false) }
     // زر التسجيل الذاتي يظهر فقط إذا لم يكن هناك أي مسؤول بعد (أول responsible يسجل يصبح مالكاً)
     var showSignUp by remember { mutableStateOf(true) }
 
@@ -147,11 +150,20 @@ fun AdminApp() {
         return
     }
 
+    if (showingCustomers) {
+        CustomersScreen(
+            client = client,
+            onClose = { showingCustomers = false },
+        )
+        return
+    }
+
     AdminScaffold(
         client = client,
         onSignOut = { client.signOut(); signedIn = false },
         onOpenEmployees = { showingEmployees = true },
         onOpenNotifications = { showingNotifications = true },
+        onOpenCustomers = { showingCustomers = true },
     )
 }
 
@@ -162,6 +174,7 @@ private fun AdminScaffold(
     onSignOut: () -> Unit,
     onOpenEmployees: () -> Unit,
     onOpenNotifications: () -> Unit,
+    onOpenCustomers: () -> Unit,
 ) {
     val lang = client.language.lang()
 
@@ -187,6 +200,10 @@ private fun AdminScaffold(
         }
         Overlay.Notifications -> {
             NotificationsScreen(client = client, onClose = { closeOverlay() })
+            return
+        }
+        Overlay.Customers -> {
+            CustomersScreen(client = client, onClose = { closeOverlay() })
             return
         }
         null -> Unit
@@ -254,6 +271,7 @@ private fun AdminScaffold(
                     onOpenSettings = { overlay = Overlay.Settings },
                     onOpenBanners = { overlay = Overlay.Banners },
                     onOpenNotifications = { overlay = Overlay.Notifications },
+                    onOpenCustomers = { overlay = Overlay.Customers },
                     isManager = true,
                 )
             }

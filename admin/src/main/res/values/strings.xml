@@ -196,4 +196,11 @@
     <string name="notify_success">نجاح</string>
     <string name="mark_read">مقروء</string>
     <string name="mark_unread">غير مقروء</string>
+
+    <!-- Customers -->
+    <string name="customers_title">العملاء</string>
+    <string name="customers_count">عميل</string>
+    <string name="customers_empty">لا يوجد عملاء بعد</string>
+    <string name="customer_orders">عدد الطلبات</string>
+    <string name="customer_total_spent">إجمالي الإنفاق</string>
 </resources>

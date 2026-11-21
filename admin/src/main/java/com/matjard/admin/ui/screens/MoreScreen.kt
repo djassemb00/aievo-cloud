@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -45,6 +46,7 @@ fun MoreScreen(
     onOpenSettings: () -> Unit,
     onOpenBanners: () -> Unit,
     onOpenNotifications: () -> Unit,
+    onOpenCustomers: () -> Unit,
     isManager: Boolean = true,
 ) {
     val context = LocalContext.current
@@ -88,6 +90,13 @@ fun MoreScreen(
                 label = stringResource(R.string.notifications_title),
                 chevronRtl = rtl,
                 onClick = onOpenNotifications,
+            )
+            Spacer(Modifier.height(8.dp))
+            NavRow(
+                icon = Icons.Filled.Person,
+                label = stringResource(R.string.customers_title),
+                chevronRtl = rtl,
+                onClick = onOpenCustomers,
             )
         }
 

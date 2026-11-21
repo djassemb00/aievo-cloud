@@ -186,4 +186,11 @@
     <string name="notify_success">Succès</string>
     <string name="mark_read">Lu</string>
     <string name="mark_unread">Non lu</string>
+
+    <!-- Customers -->
+    <string name="customers_title">Clients</string>
+    <string name="customers_count">clients</string>
+    <string name="customers_empty">Aucun client pour le moment</string>
+    <string name="customer_orders">Nombre de commandes</string>
+    <string name="customer_total_spent">Total dépensé</string>
 </resources>
