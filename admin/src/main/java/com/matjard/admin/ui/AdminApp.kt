@@ -67,14 +67,15 @@ fun AdminApp() {
     // زر التسجيل الذاتي يظهر فقط إذا لم يكن هناك أي مسؤول بعد (أول responsible يسجل يصبح مالكاً)
     var showSignUp by remember { mutableStateOf(true) }
 
-    LaunchedEffect(Unit) {
-        // تحقق مما إذا وجد أي مسؤول في النظام لإظهار/إخفاء زر إنشاء حساب جديد
+    // إعادة التحقق من وجود مسؤولين كلما تغيرت حالة تسجيل الدخول،
+    // ليختفي زر التسجيل من جميع نسخ التطبيق فوراً بعد تسجيل أي مسؤول
+    LaunchedEffect(signedIn) {
         showSignUp = try {
             !client.anyAdminExists()
         } catch (e: Exception) {
             true
         }
-        if (client.signedIn()) {
+        if (!signedIn && client.signedIn()) {
             signedIn = client.ensureFreshToken()
             // أول مستخدم registrado يصبح مالكاً تلقائياً
             client.ensureOwnerIfFirst()
