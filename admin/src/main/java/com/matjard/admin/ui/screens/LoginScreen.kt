@@ -108,7 +108,7 @@ fun LoginScreen(
             // Step 1: Email + Password
             OutlinedTextField(
                 value = email,
-                onValueChange = { newEmail -> email = newEmail; error = null },
+                onValueChange = { newEmail: String -> email = newEmail; error = null },
                 label = { Text(stringResource(R.string.email)) },
                 leadingIcon = { Icon(Icons.Filled.MailOutline, contentDescription = null) },
                 singleLine = true,
@@ -120,7 +120,7 @@ fun LoginScreen(
             Spacer(Modifier.height(12.dp))
             OutlinedTextField(
                 value = password,
-                onValueChange = { newPassword -> password = newPassword; error = null },
+                onValueChange = { newPassword: String -> password = newPassword; error = null },
                 label = { Text(stringResource(R.string.password)) },
                 leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) },
                 singleLine = true,
@@ -191,7 +191,7 @@ fun LoginScreen(
             Spacer(Modifier.height(16.dp))
             OutlinedTextField(
                 value = otpCode,
-                onValueChange = { newOtp -> otpCode = newOtp; error = null },
+                onValueChange = { newOtp: String -> otpCode = newOtp; error = null },
                 label = { Text(stringResource(R.string.otp_code)) },
                 leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) },
                 singleLine = true,

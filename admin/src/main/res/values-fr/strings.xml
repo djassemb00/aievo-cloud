@@ -171,6 +171,6 @@
     <string name="otp_code">Code de verification (6 chiffres)</string>
     <string name="verify_code">Verifier le code</string>
     <string name="verifying">Verification en cours</string>
-    <string name="change_email">Changer l'email</string>
+    <string name="change_email">Changer l&#39;email</string>
     <string name="code_sent_info">Un code de vérification a été envoyé à votre e-mail. Le code expire après une minute.</string>
 </resources>
