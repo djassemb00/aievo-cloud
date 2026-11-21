@@ -94,22 +94,21 @@ fun LoginScreen(
             Text("D", fontSize = 46.sp, fontWeight = FontWeight.Black, color = androidx.compose.ui.graphics.Color.White)
         }
         Spacer(Modifier.height(18.dp))
-        when (stage) {
-            LoginStage.Password -> {
-                Text(stringResource(R.string.login_title), fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
-                Text(stringResource(R.string.login_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            LoginStage.Otp -> {
-                Text(stringResource(R.string.verify_title), fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
-                Text(stringResource(R.string.verify_subtitle_for, email), color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
+
+        if (stage == LoginStage.Password) {
+            Text(stringResource(R.string.login_title), fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+            Text(stringResource(R.string.login_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
+        } else {
+            Text(stringResource(R.string.verify_title), fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+            Text(stringResource(R.string.verify_subtitle_for, email), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         Spacer(Modifier.height(28.dp))
 
         if (stage == LoginStage.Password) {
+            // Step 1: Email + Password
             OutlinedTextField(
                 value = email,
-                onValueChange = { email = it; error = null },
+                onValueChange = { newEmail -> email = newEmail; error = null },
                 label = { Text(stringResource(R.string.email)) },
                 leadingIcon = { Icon(Icons.Filled.MailOutline, contentDescription = null) },
                 singleLine = true,
@@ -121,14 +120,17 @@ fun LoginScreen(
             Spacer(Modifier.height(12.dp))
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = it; error = null },
+                onValueChange = { newPassword -> password = newPassword; error = null },
                 label = { Text(stringResource(R.string.password)) },
                 leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) },
                 singleLine = true,
                 enabled = !busy,
                 visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    FilledTonalIconButton(onClick = { showPassword = !showPassword }, modifier = Modifier.size(36.dp)) {
+                    FilledTonalIconButton(
+                        onClick = { showPassword = !showPassword },
+                        modifier = Modifier.size(36.dp),
+                    ) {
                         Icon(
                             if (showPassword) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
                             contentDescription = null,
@@ -184,11 +186,12 @@ fun LoginScreen(
 
             Spacer(Modifier.height(24.dp))
         } else {
+            // Step 2: OTP verification
             Text(stringResource(R.string.enter_code_sent_to, email), fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(16.dp))
             OutlinedTextField(
                 value = otpCode,
-                onValueChange = { otpCode = it; error = null },
+                onValueChange = { newOtp -> otpCode = newOtp; error = null },
                 label = { Text(stringResource(R.string.otp_code)) },
                 leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) },
                 singleLine = true,
