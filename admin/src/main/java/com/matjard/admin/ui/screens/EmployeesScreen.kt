@@ -1,6 +1,5 @@
 package com.matjard.admin.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,9 +21,6 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExposedDropdownMenu
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuItem
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,7 +28,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -51,7 +46,6 @@ import com.matjard.core.AdminUser
 import com.matjard.core.MatjardClient
 import com.matjard.admin.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmployeesScreen(
     client: MatjardClient,
@@ -68,10 +62,16 @@ fun EmployeesScreen(
     var newEmail by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
     var newRole by remember { mutableStateOf<String?>(null) }
+    var addDropdownOpen by remember { mutableStateOf(false) }
     var addingBusy by remember { mutableStateOf(false) }
 
-    // Which user's role dropdown is open
-    var expandedUserId by remember { mutableStateOf<String?>(null) }
+    // Edit role dialog state
+    var editUserId by remember { mutableStateOf<String?>(null) }
+    var editUserEmail by remember { mutableStateOf("") }
+    var editRole by remember { mutableStateOf<String?>(null) }
+    var editDropdownOpen by remember { mutableStateOf(false) }
+
+    val roles = listOf("owner", "manager", "staff")
 
     fun loadUsers() {
         refreshing = true
@@ -87,14 +87,11 @@ fun EmployeesScreen(
         }
     }
 
-    // Load on first composition
     var loaded by remember { mutableStateOf(false) }
     if (!loaded) {
         loaded = true
         loadUsers()
     }
-
-    val roles = listOf("owner", "manager", "staff")
 
     Column(
         modifier = Modifier
@@ -181,48 +178,59 @@ fun EmployeesScreen(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
-                            if (expandedUserId == user.id) {
-                                ExposedDropdownMenuBox(
-                                    expanded = true,
-                                    onExpandedChange = { expanded = it },
+                            ChipRole(role = user.role)
+                            Spacer(Modifier.width(8.dp))
+                            if (editUserId == user.id) {
+                                Column(
                                     modifier = Modifier.align(Alignment.CenterVertically),
                                 ) {
-                                    ExposedDropdownMenu(
-                                        expanded = true,
+                                    Text(
+                                        text = stringResource(R.string.select_role),
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.padding(bottom = 4.dp),
+                                    )
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
                                     ) {
                                         roles.forEach { role ->
-                                            ExposedDropdownMenuItem(
+                                            Button(
                                                 onClick = {
                                                     scope.launch {
                                                         try {
                                                             busy = true
                                                             client.updateAdminUserRole(user.id, role)
                                                             loadUsers()
+                                                            editUserId = null
                                                         } catch (e: Exception) {
                                                             error = "تعذر تحديث الرتبة"
                                                         } finally {
                                                             busy = false
-                                                            expandedUserId = null
                                                         }
                                                     }
                                                 },
-                                                text = { Text(role.uppercase()) },
-                                            )
+                                                enabled = !busy,
+                                                shape = RoundedCornerShape(8.dp),
+                                                modifier = Modifier.width(80.dp),
+                                            ) {
+                                                Text(
+                                                    text = role.uppercase(),
+                                                    fontSize = 10.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                )
+                                            }
                                         }
                                     }
                                 }
+                            } else {
                                 FilledTonalIconButton(
-                                    onClick = { expandedUserId = null },
+                                    onClick = {
+                                        editUserId = if (editUserId == user.id) null else user.id
+                                        editRole = user.role
+                                    },
                                 ) {
                                     Icon(Icons.Filled.Delete, contentDescription = null)
-                                }
-                            } else {
-                                ChipRole(role = user.role)
-                                Spacer(Modifier.width(8.dp))
-                                FilledTonalIconButton(
-                                    onClick = { expandedUserId = user.id },
-                                ) {
-                                    Icon(Icons.Filled.Edit, contentDescription = null)
                                 }
                             }
                         }
@@ -306,29 +314,30 @@ fun EmployeesScreen(
                         shape = RoundedCornerShape(10.dp),
                     )
                     Spacer(Modifier.height(12.dp))
-                    ExposedDropdownMenuBox(
-                        expanded = newRole != null,
-                        onExpansionChange = { expanded = newRole != null },
+                    Text(
+                        text = stringResource(R.string.select_role),
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier.padding(bottom = 4.dp),
+                    )
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
-                        ExposedDropdownMenu(
-                            expanded = newRole != null,
-                        ) {
-                            roles.forEach { role ->
-                                ExposedDropdownMenuItem(
-                                    onClick = { newRole = role },
-                                    text = { Text(role.uppercase()) },
+                        roles.forEach { role ->
+                            Button(
+                                onClick = { newRole = role },
+                                enabled = !addingBusy,
+                                shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.width(80.dp),
+                            ) {
+                                Text(
+                                    text = if (newRole == role) "✓ " + role.uppercase() else role.uppercase(),
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
                                 )
                             }
                         }
-                        OutlinedTextField(
-                            readOnly = true,
-                            value = newRole?.uppercase() ?: stringResource(R.string.select_role),
-                            onValueChange = {},
-                            modifier = Modifier.fillMaxWidth(),
-                            shape = RoundedCornerShape(10.dp),
-                            label = { Text(stringResource(R.string.role)) },
-                        )
                     }
                     Spacer(Modifier.height(16.dp))
                     Row(
