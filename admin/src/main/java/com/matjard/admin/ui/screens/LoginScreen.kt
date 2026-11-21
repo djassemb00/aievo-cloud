@@ -52,6 +52,11 @@ import kotlinx.coroutines.launch
 import com.matjard.core.MatjardClient
 import com.matjard.admin.R
 
+sealed class LoginStage {
+    object Password : LoginStage()
+    object Otp : LoginStage()
+}
+
 @Composable
 fun LoginScreen(
     client: MatjardClient,
@@ -68,12 +73,7 @@ fun LoginScreen(
     var otpSent by remember { mutableStateOf(false) }
     var resendEnabled by remember { mutableStateOf(true) }
     var resendCountdown by remember { mutableStateOf(60) }
-    var stage by remember { mutableStateOf<LoginStage>(LoginStage.Password) }
-
-    sealed class LoginStage {
-        object Password : LoginStage()
-        object Otp : LoginStage()
-    }
+    var stage by remember { mutableStateOf(LoginStage.Password) }
 
     Column(
         modifier = Modifier
