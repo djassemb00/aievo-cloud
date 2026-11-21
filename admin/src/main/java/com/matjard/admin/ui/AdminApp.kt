@@ -22,6 +22,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +32,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle.Event.ON_STOP
+import androidx.lifecycle.LocalLifecycleOwner
 import com.matjard.core.MatjardClient
 import com.matjard.core.Product
 import com.matjard.admin.R
@@ -81,6 +85,21 @@ fun AdminApp() {
             client.ensureOwnerIfFirst()
         }
         sessionChecked = true
+    }
+
+    // تسجيل خروج تلقائي عند خروج التطبيق للخلفية دون تسجيل خروج يدوي
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner, client, signedIn) {
+        val observer = DefaultLifecycleObserver { _, event ->
+            if (event == ON_STOP && signedIn) {
+                client.signOut()
+                signedIn = false
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
     }
 
     if (!sessionChecked) {
