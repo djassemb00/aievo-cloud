@@ -131,6 +131,13 @@ interface PostgrestApi {
     @DELETE("rest/v1/admin_users")
     suspend fun deleteAdminUser(@Query("id") idFilter: String): Response<ResponseBody>
 
+    // ---- admin notifications table -------------------------------------------
+    @GET("rest/v1/admin_notifications")
+    suspend fun listAdminNotifications(@Query("select") select: String = "*", @Query("order") order: String = "created_at.desc"): List<AdminNotification>
+
+    @PATCH("rest/v1/admin_notifications")
+    suspend fun updateAdminNotification(@Query("id") idFilter: String, @Body fields: Map<String, @JvmSuppressWildcards Any?>): Response<ResponseBody>
+
     // ---- RPC: make first user owner ------------------------------------------
     @POST("rest/v1/rpc/set_owner_if_first")
     suspend fun setOwnerIfFirst(@Body body: RoleRequest): Response<RoleResult>
@@ -146,6 +153,16 @@ interface PostgrestApi {
 // طلب تعيين رتبة أول مستخدم
 data class RoleRequest(@SerializedName("p_role") val role: String)
 data class RoleResult(@SerializedName("role") val role: String)
+
+// نموذج الإشعار الإداري
+data class AdminNotification(
+    val id: String,
+    val title: String,
+    val message: String,
+    val type: String,
+    @SerializedName("is_read") val isRead: Boolean,
+    @SerializedName("created_at") val createdAt: String,
+)
 
 interface StorageApi {
     @POST("storage/v1/object/product-images/{file}")

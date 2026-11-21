@@ -251,6 +251,84 @@ class MatjardClient(context: Context) {
     }
 
     // ------------------------------------------------------------------
+    // Email OTP & Notifications (via Supabase Edge Functions)
+    // ------------------------------------------------------------------
+
+    /** يرسل رمز مصادقة بريد إلكتروني (6 أرقام) ينتهي بعد دقيقة واحدة عبر Edge Function. */
+    suspend fun sendLoginOTP(email: String) {
+        val result = try {
+            invokeEdgeFunction("send-otp", mapOf("email" to email, "purpose" to "login"))
+        } catch (e: Exception) {
+            throw IOException("تعذر إرسال رمز المصادقة: ${e.message}")
+        }
+        if (result != true) throw IOException("فشل إرسال رمز المصادقة")
+    }
+
+    /** يتحقق من رمز المصادقة المرسل للبريد الإلكتروني عبر Edge Function. */
+    suspend fun verifyLoginOTP(email: String, code: String): Boolean {
+        return try {
+            invokeEdgeFunction("verify-otp", mapOf("email" to email, "code" to code)) == true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /** يرسل إشعاراً للمسؤول (يُخزّن في جدول الإشعارات). */
+    suspend fun sendAdminNotification(title: String, message: String, type: String = "info") {
+        try {
+            val resp = api.rest.createAdminNotification(mapOf(
+                "p_title" to title,
+                "p_message" to message,
+                "p_type" to type,
+            ))
+            if (!resp.isSuccessful) throw IOException("فشل إرسال الإشعار")
+        } catch (e: Exception) {
+            // الإشعارات غير ضرورية لسير العمل الأساسي
+        }
+    }
+
+    /** يجلب الإشعارات غير المقروءة للمسؤول. */
+    suspend fun listAdminNotifications(): List<AdminNotification> {
+        return try {
+            api.rest.listAdminNotifications(select = "*", order = "created_at.desc")
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    /** يحدد إشعاراً كمقروء. */
+    suspend fun markNotificationRead(id: String) =
+        ensureOk(api.rest.updateAdminNotification("eq.$id", mapOf("is_read" to true)), "markNotificationRead")
+
+    // ------------------------------------------------------------------
+    // Edge Function helper
+    // ------------------------------------------------------------------
+
+    /** يستدعي دالة Edge Function في ترسل الطلب عبر HTTP ويحلل الاستجابة كـ JSON. */
+    private suspend fun invokeEdgeFunction(slug: String, body: Map<String, Any?>): Any? {
+        val url = "${Supabase.PROJECT_URL}/functions/v1/$slug"
+        val jsonBody = com.google.gson.Gson().toJson(body)
+        val requestBody = jsonBody.toRequestBody("application/json".toMediaTypeOrNull())
+        val request = okhttp3.Request.Builder()
+            .url(url)
+            .header("apikey", Supabase.PUBLISHABLE_KEY)
+            .header("Authorization", "Bearer ${Supabase.PUBLISHABLE_KEY}")
+            .header("Content-Type", "application/json")
+            .post(requestBody)
+            .build()
+        val client = okHttpClient
+        val response = client.newCall(request).execute()
+        val responseBody = response.body()?.string() ?: ""
+        response.close()
+        if (!response.isSuccessful) throw IOException("HTTP ${response.code}: $responseBody")
+        return try {
+            com.google.gson.JsonParser.parseString(responseBody).asJsonObject.get("success")?.asBoolean
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    // ------------------------------------------------------------------
     // Admin catalog writes
     // ------------------------------------------------------------------
 
