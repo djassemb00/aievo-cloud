@@ -20,6 +20,8 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -330,7 +332,7 @@ private fun ProductRow(
             Column {
                 IconButton(onClick = onToggleFeatured, modifier = Modifier.size(34.dp)) {
                     Icon(
-                        if (product.isFeatured) Icons.Filled.Star else Icons.Filled.StarBorder,
+                        if (product.isFeatured) Star else StarBorder,
                         contentDescription = null,
                         tint = if (product.isFeatured) androidx.compose.ui.graphics.Color(0xFFF59E0B) else MaterialTheme.colorScheme.onSurfaceVariant,
                     )
